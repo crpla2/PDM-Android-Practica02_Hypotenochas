@@ -1,13 +1,12 @@
 package com.example.practica02_hypotenochas;
 
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,19 +20,22 @@ public class MainActivityPerso  extends AppCompatActivity implements AdapterView
         iv = (ImageView) findViewById(R.id.imageViewPersonaje);
         Spinner spn = (Spinner) findViewById(R.id.spinnerPersonajes);
         spn.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.personajes, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spn.setAdapter(adapter);
 
 
     }
 
-    @SuppressLint("ResourceType")
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
 
        int item= parent.getSelectedItemPosition();
-        Toast.makeText(getApplicationContext(),
-                        R.array.personajes,
-                        Toast.LENGTH_LONG)
-                .show();
+
         System.out.println(item);
         /*
 
