@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Practica02_Hypotenochas</string>
+    <string name="spn_title">Elige un personaje</string>
+    <string-array name="personajes">
+        <item>Bob Esponja</item>
+        <item>Arenita</item>
+        <item>Calamardo</item>
+        <item>Don Cangrejo</item>
+        <item>Patricio</item>
+        <item>Plankton</item>
+        <item>Gary</item>
+    </string-array>
+</resources>
