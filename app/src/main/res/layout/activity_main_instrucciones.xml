@@ -10,7 +10,7 @@
         android:id="@+id/textViewTituloInstrucciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="80dp"
         android:text="Instrucciones"
         android:textAlignment="center"
         android:textColor="@color/orange"
@@ -18,17 +18,27 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="316dp"
         android:layout_height="378dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:text="El juego consiste en despejar todas las casillas de la pantalla que no oculten una *cangreburguer*.  Algunas casillas tienen un número, este número indica las *cangreburguer* que hay en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con *cangreburguer* y 5 sin *cangreburguer*. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene *cangreburguer* y estas se descubren automáticamente.  Si se descubre una casilla con una mina se *cangreburguer* la partida.  Se puede poner una marca en las casillas que el jugador piensa que hay *cangreburguer* para ayudar a descubrir las que están cerca."
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTituloInstrucciones" />
+
+    <Button
+        android:id="@+id/buttonVolver2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:text="VOLVER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

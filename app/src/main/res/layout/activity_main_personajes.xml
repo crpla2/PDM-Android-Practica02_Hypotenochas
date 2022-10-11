@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/burbujas">
+    android:background="@drawable/burbujas"
+    tools:context=".MainActivityPerso">
 
     <Spinner
         android:id="@+id/spinnerPersonajes"
         android:layout_width="221dp"
         android:layout_height="27dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:entries="@array/personajes"
-
-        android:prompt="@string/spn_title"
-
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,10 +38,22 @@
         android:id="@+id/imageViewPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPersonajes"
         app:srcCompat="@drawable/bob" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        android:onClick="onClickVolverPerso"
+        android:text="VOLVER"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

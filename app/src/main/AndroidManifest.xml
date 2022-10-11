@@ -25,6 +25,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityConfig" />
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityPerso" />
     </application>
 
 </manifest>
