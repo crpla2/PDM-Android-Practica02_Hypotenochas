@@ -15,18 +15,23 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     Intent entrada,salida;
     boolean recargado=false;
+    int icon,casillas,minas;
     Drawable icono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        salida = getIntent();
         entrada = getIntent();
         Bundle b= entrada.getExtras();
 
         if (b != null) {
             recargado=true;
-            icono=getDrawable(b.getInt("personaje"));
+            icon=b.getInt("personaje");
+            icono=getDrawable(icon);
+            casillas=b.getInt("casillas");
+            minas=b.getInt("minas");
+            Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Minas:"+minas, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -45,15 +50,23 @@ public class MainActivity extends AppCompatActivity {
         switch ((item.getItemId())){
             case R.id.instrucciones:
                 salida = new Intent(this,MainActivityInstrucciones.class);
+                salida.putExtra("personaje",icon);
                 startActivity(salida);
+
                 break;
             case R.id.nuevo:
                 salida = new Intent(this,MainActivityNuevo.class);
+                salida.putExtra("personaje",icon);
+                salida.putExtra("casillas",casillas);
+                salida.putExtra("minas",minas);
                 startActivity(salida);
+
                 break;
             case R.id.config:
                 salida = new Intent(this,MainActivityConfig.class);
+                salida.putExtra("personaje",icon);
                 startActivity(salida);
+
                 break;
             case R.id.perso:
                 salida = new Intent(this,MainActivityPerso.class);
