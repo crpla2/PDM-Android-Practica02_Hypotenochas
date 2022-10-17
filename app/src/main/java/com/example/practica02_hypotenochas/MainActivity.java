@@ -3,19 +3,33 @@ package com.example.practica02_hypotenochas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Intent entrada,salida;
+    MenuItem mi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         salida = getIntent();
 
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+       /* entrada = getIntent();
+        mi=findViewById(R.id.perso);
+        mi=findViewById(R.id.perso);
+        Bundle b = entrada.getExtras();
+        mi.setIcon((Drawable) b.get("personaje"));*/
+
+      //  mi.setIcon(R.drawable.arenita);
+        Toast.makeText(getApplicationContext(),"heheheh", Toast.LENGTH_LONG).show();
 
     }
     @Override
@@ -24,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch ((item.getItemId())){

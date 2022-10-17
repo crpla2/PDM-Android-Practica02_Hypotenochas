@@ -27,6 +27,8 @@
         </activity>
         <activity android:name="com.example.practica02_hypotenochas.MainActivityConfig" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityPerso" />
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityInstrucciones" />
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityNuevo" />
     </application>
 
 </manifest>
