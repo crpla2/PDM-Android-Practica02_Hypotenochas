@@ -4,42 +4,41 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Intent entrada,salida;
-    MenuItem mi;
+    boolean recargado=false;
+    Drawable icono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         salida = getIntent();
+        entrada = getIntent();
+        Bundle b= entrada.getExtras();
 
+        if (b != null) {
+            recargado=true;
+            icono=getDrawable(b.getInt("personaje"));
+        }
     }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-       /* entrada = getIntent();
-        mi=findViewById(R.id.perso);
-        mi=findViewById(R.id.perso);
-        Bundle b = entrada.getExtras();
-        mi.setIcon((Drawable) b.get("personaje"));*/
 
-      //  mi.setIcon(R.drawable.arenita);
-        Toast.makeText(getApplicationContext(),"heheheh", Toast.LENGTH_LONG).show();
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflamos el menu
         getMenuInflater().inflate(R.menu.menu, menu);
+        if (recargado){
+            menu.getItem(3).setIcon(icono);
+        }
         return true;
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

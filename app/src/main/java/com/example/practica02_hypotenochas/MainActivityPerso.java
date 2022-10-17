@@ -44,31 +44,37 @@ public class MainActivityPerso  extends AppCompatActivity implements AdapterView
         {
             case 0:
                 iv.setImageResource(R.drawable.bob);
+                salida.putExtra("personaje",R.drawable.bob);
                 break;
             case 1:
                 iv.setImageResource(R.drawable.arenita);
+                salida.putExtra("personaje",R.drawable.arenita);
                 break;
             case 2:
                 iv.setImageResource(R.drawable.calamardo);
+                salida.putExtra("personaje", R.drawable.calamardo);
                 break;
             case 3:
                 iv.setImageResource(R.drawable.cangrejo);
+                salida.putExtra("personaje", R.drawable.cangrejo);
                 break;
             case 4:
                 iv.setImageResource(R.drawable.patricio);
+                salida.putExtra("personaje",R.drawable.patricio);
                 break;
             case 5:
                 iv.setImageResource(R.drawable.placton);
+                salida.putExtra("personaje", R.drawable.placton);
                 break;
             case 6:
                 iv.setImageResource(R.drawable.gary);
-                salida.putExtra("personaje", R.drawable.gary);
+                salida.putExtra("personaje",R.drawable.gary);
                 break;
             default:
                 break;
         }
 
-        Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
 
 
 
