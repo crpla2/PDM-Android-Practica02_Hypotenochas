@@ -3,19 +3,17 @@ package com.example.practica02_hypotenochas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivityConfig extends AppCompatActivity {
-    Intent entrada,salida;
+    Intent salida;
     int icon,casillas,minas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_config);
-        entrada = getIntent();
-        Bundle b= entrada.getExtras();
-        icon=b.getInt("personaje");
     }
 
     public void onRadioButtonClicked(View view){
@@ -32,10 +30,12 @@ public class MainActivityConfig extends AppCompatActivity {
                 casillas=256;
                 minas=60;
                 break;
-        }
+        }Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Minas:"+minas, Toast.LENGTH_LONG).show();
     }
     public void onClickVolverConfig(View view){
-        salida = new Intent(this,MainActivity.class);
+
+        salida = new Intent(this,MainActivityNuevo.class);
         salida.putExtra("personaje",icon);
         salida.putExtra("casillas",casillas);
         salida.putExtra("minas",minas);

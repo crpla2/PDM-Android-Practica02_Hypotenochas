@@ -7,9 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivityPerso  extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -21,7 +19,7 @@ public class MainActivityPerso  extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_personajes);
-        entrada= getIntent();
+
         inicioXML();
         darClic();
     }
@@ -64,7 +62,7 @@ public class MainActivityPerso  extends AppCompatActivity implements AdapterView
                 break;
             case 5:
                 iv.setImageResource(R.drawable.placton);
-                salida.putExtra("personaje", R.drawable.placton);
+                salida.putExtra("personaje",R.drawable.placton );
                 break;
             case 6:
                 iv.setImageResource(R.drawable.gary);

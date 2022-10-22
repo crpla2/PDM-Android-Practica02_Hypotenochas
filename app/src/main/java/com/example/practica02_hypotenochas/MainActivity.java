@@ -1,16 +1,13 @@
 package com.example.practica02_hypotenochas;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Intent entrada,salida;
@@ -30,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
             icono=getDrawable(icon);
             casillas=b.getInt("casillas");
             minas=b.getInt("minas");
-            Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(),"Minas:"+minas, Toast.LENGTH_LONG).show();
+
         }
+        Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Minas:"+minas, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -50,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         switch ((item.getItemId())){
             case R.id.instrucciones:
                 salida = new Intent(this,MainActivityInstrucciones.class);
-                salida.putExtra("personaje",icon);
                 startActivity(salida);
 
                 break;

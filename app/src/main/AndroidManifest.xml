@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_background"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -28,7 +28,8 @@
         <activity android:name="com.example.practica02_hypotenochas.MainActivityConfig" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityPerso" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityInstrucciones" />
-        <activity android:name="com.example.practica02_hypotenochas.MainActivityNuevo" />
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityNuevo"
+                  android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

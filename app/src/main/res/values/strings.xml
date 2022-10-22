@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practica02_Hypotenochas</string>
+    <string name="app_name">Busca Cangre-Burguers</string>
     <string name="spn_title">Elige un personaje</string>
     <string-array name="personajes">
         <item>Bob Esponja</item>
