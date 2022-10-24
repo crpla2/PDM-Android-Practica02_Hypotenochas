@@ -1,7 +1,6 @@
 package com.example.practica02_hypotenochas;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
 
 public class MainActivityNuevo extends AppCompatActivity {
@@ -37,6 +35,8 @@ public class MainActivityNuevo extends AppCompatActivity {
     boolean perdido = false;
     boolean ganado = false;
     //
+    boolean clicado = false;
+
     List<Button> botones = new ArrayList<>();
 
     /**
@@ -62,8 +62,8 @@ public class MainActivityNuevo extends AppCompatActivity {
             numMinas=b.getInt("minas");
         }
         filasTablero= (int) Math.sqrt(casillas);
-        Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"Minas:"+numMinas, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Minas:"+numMinas, Toast.LENGTH_LONG).show();
 
         tablero = findViewById(R.id.tablero);
         tablero.setOrientation(LinearLayout.HORIZONTAL);
@@ -116,10 +116,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
-    boolean clicado = false;
-
     private boolean onLongClick(View view) {
-
         if (!clicado) {
             view.setForeground(getResources().getDrawable(R.drawable.bobmarcador));
             clicado = true;
@@ -131,7 +128,6 @@ public class MainActivityNuevo extends AppCompatActivity {
             clicado = false;
             view.setClickable(true);
         }
-
         return true;
     }
 
@@ -164,16 +160,28 @@ public class MainActivityNuevo extends AppCompatActivity {
                     }
                 }
             }
+            //espera 0.2 segundos
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                setContentView(R.layout.activity_main_nuevo);
+                //espera 0.2 segundos
+
+                handler.postDelayed(() -> {
+                    salida = new Intent(this,MainActivity.class);
+                    startActivity(salida);
+
+                    //fin espera
+                }, 5000);
+                //fin espera
+            }, 2000);
+
+
         } else {
             //Se descubren las casillas y se escribe el numero de bombas adyacentes
             for (Map.Entry<Integer, Integer> integerEntry : game.entrySet()) {
-
-
                 for (int i = 0; i < casillas; i++) {
                     Button b = botones.get(i);
-
                     if (b.getId() == integerEntry.getKey()) {
-
                         //efecto Rippler
                         b.setBackgroundResource(R.drawable.efectto_pulsar);
                         //espera 0.2 segundos
