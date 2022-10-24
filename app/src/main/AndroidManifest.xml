@@ -30,6 +30,10 @@
         <activity android:name="com.example.practica02_hypotenochas.MainActivityInstrucciones" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityNuevo"
                   android:theme="@style/AppTheme.NoActionBar"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

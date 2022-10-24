@@ -100,7 +100,7 @@ public class MainActivityNuevo extends AppCompatActivity {
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         1));
-                button.setBackgroundColor(colorAleatorio());
+
                 button.setId(numBoton);
                 numBoton += filasTablero;
                 button.setBackground(getDrawable(R.drawable.boton_frente));
@@ -123,11 +123,13 @@ public class MainActivityNuevo extends AppCompatActivity {
         if (!clicado) {
             view.setForeground(getResources().getDrawable(R.drawable.bobmarcador));
             clicado = true;
+            view.setClickable(false);
             if(juego.tieneMina(view.getId()))
                 destapadas++;
         } else {
             view.setForeground(getResources().getDrawable(R.drawable.boton_frente));
             clicado = false;
+            view.setClickable(true);
         }
 
         return true;
@@ -144,6 +146,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      *             - Si es pulsado cualquier otro de los "n" botones cambia el color del botón seleccionado.
      */
     public void onClick(View view) {
+        if(view.isClickable()){
         game = juego.descubreCasillas(view.getId());
         //Se combrueba que la casilla seleccionada no contenga una bomba
         for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
@@ -157,8 +160,6 @@ public class MainActivityNuevo extends AppCompatActivity {
             for (Map.Entry<Integer, Integer> minasEntry2 : tableroMinado.entrySet()) {
                 for (int i = 0; i < casillas; i++) {
                     if ((minasEntry2.getKey() == (botones.get(i).getId())) && (minasEntry2.getValue() == 1)) {
-                        //  Animation shake = AnimationUtils.loadAnimation( R.anim.);
-                        //  view.startAnimation(shake);
                         botones.get(i).setForeground(getDrawable(R.drawable.bomburguesa));
                     }
                 }
@@ -205,27 +206,9 @@ public class MainActivityNuevo extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Ganaste!!" + destapadas, Toast.LENGTH_LONG).show();
             ganado = true;
         }
+        }
     }
 
-    /**
-     * Método que genera un color de forma aleatoria.
-     *
-     * @return int devuelve un entero (Color ints).
-     * FUNCIONAMIENTO:
-     * Crea un objeto "rnd" de la clase Random y mediante el método nextInt(255) genera números
-     * aleatorios hasta el 255.
-     * Llama al método estático "argb" de la Clase Color que recibe cuatro argumentos en
-     * forma de entero(int) del rango [0-255], donde:
-     * - El primer argumento "Alpha" es el nivel de opacidad (fijado al máximo:255).
-     * - El segundo argumento "Red" el nivel de rojo (generado aleatoriamente).
-     * - El tercer argumento "Green" el nivel de verde (generado aleatoriamente).
-     * - El tercer argumento "Blue" el nivel de azul (generado aleatoriamente).
-     */
-    private int colorAleatorio() {
-        Random rnd = new Random();
-        return Color.argb(255, rnd.nextInt(100),
-                rnd.nextInt(150), 180);
-    }
 
 
 }

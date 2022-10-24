@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Search Krabby Patty</string>
+    <string name="spn_title">Choose a character</string>
+    <string name="busca">Search</string>
+    <string name="logo">Logo</string>
+    <string name="configuracion">Settings</string>
+    <string name="principiante">Beginner</string>
+    <string name="amateur">Amateur</string>
+    <string name="avanzado">Advanced</string>
+    <string name="volver">GO BACK</string>
+    <string name="instrucciones">Instructions</string>
+    <string name="instruccionesTexto">The game consists of clearing all the squares on the screen that do not hide a *krabby patty*. Some squares have a number, this number indicates the *krabby patties* that are in all the surrounding squares. Thus, if a square has the number 3, it means that of the eight squares around it (if it is not in a corner or edge) there are 3 with *crabburger* and 5 without *crabburger*. If a square without a number is discovered, it indicates that none of the neighboring squares have *krabby patties* and these are automatically discovered. If a square with a mine is discovered, the game is *krabby patty*. You can put a mark on the squares that the player thinks are *crabby patties* to help figure out which ones are nearby.</string>
+    <string name="esponjas">sponges</string>
+    <string name="reloj">clock</string>
+    <string name="personajes">Characters</string>
+    <string name="personajeelegido">chosen character</string>
+</resources>

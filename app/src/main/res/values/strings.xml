@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">Busca Cangre-Burguers</string>
+    <string name="app_name">Busca Cangre Burguers</string>
     <string name="spn_title">Elige un personaje</string>
+    <string name="busca">Busca</string>
+    <string name="logo">logotipo</string>
+    <string name="configuracion">Configuración</string>
+    <string name="principiante">Principiante</string>
+    <string name="amateur">Amateur</string>
+    <string name="avanzado">Avanzado</string>
+    <string name="volver">VOLVER</string>
+    <string name="instrucciones">Instrucciones</string>
+    <string name="instruccionesTexto">El juego consiste en despejar todas las casillas de la pantalla que no oculten una *cangreburguer*. Algunas casillas tienen un número, este número indica las *cangreburguer* que hay en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con *cangreburguer* y 5 sin *cangreburguer*. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene *cangreburguer* y estas se descubren automáticamente. Si se descubre una casilla con una mina se *cangreburguer* la partida. Se puede poner una marca en las casillas que el jugador piensa que hay *cangreburguer* para ayudar a descubrir las que están cerca.</string>
+    <string name="esponjas">esponjas</string>
+    <string name="contadorCero" translatable="false">00</string>
+    <string name="reloj">reloj</string>
+    <string name="temporizadorCero" translatable="false">00:00</string>
+    <string name="personajes">Personajes</string>
+    <string name="personajeelegido">personaje elegido</string>
     <string-array name="personajes">
         <item>Bob Esponja</item>
         <item>Arenita</item>

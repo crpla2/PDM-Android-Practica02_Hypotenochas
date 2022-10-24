@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/burbujas">
@@ -11,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Configuración"
+        android:text="@string/configuracion"
         android:textAlignment="center"
         android:textColor="@color/orange"
         android:textSize="34sp"
@@ -36,7 +35,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:onClick="onRadioButtonClicked"
-            android:text="Principiante"
+            android:text="@string/principiante"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -45,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="Amateur"
+            android:text="@string/amateur"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -54,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="Avanzado"
+            android:text="@string/avanzado"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RadioGroup>
@@ -65,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
         android:onClick="onClickVolverConfig"
-        android:text="Volver"
+        android:text="@string/volver"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

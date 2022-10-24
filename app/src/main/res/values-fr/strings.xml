@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trouver Pâté de Crabe</string>
+    <string name="spn_title">Choisir un personnage</string>
+    <string name="busca">Chercher</string>
+    <string name="logo">Logo</string>
+    <string name="configuracion">Paramètres</string>
+    <string name="principiante">Débutant</string>
+    <string name="amateur">Amateur</string>
+    <string name="avanzado">Avancé</string>
+    <string name="volver">REVENIR</string>
+    <string name="instrucciones">Des instructions</string>
+    <string name="instruccionesTexto">Le jeu consiste à nettoyer toutes les cases de l\'écran qui ne cachent pas une *pâtée de crabe*. Certaines cases ont un numéro, ce numéro indique les *pâtes de crabe* qui se trouvent dans toutes les cases environnantes. Ainsi, si un carré porte le numéro 3, cela signifie que sur les huit carrés qui l\'entourent (s\'il n\'est pas dans un coin ou un bord) il y en a 3 avec *crabburger* et 5 sans *crabburger*. Si une case sans numéro est découverte, cela indique qu\'aucune des cases voisines n\'a de *pâtes de crabe* et celles-ci sont automatiquement découvertes. Si un carré avec une mine est découvert, le jeu est *pâté de crabe*. Vous pouvez mettre une marque sur les carrés que le joueur pense être des * galettes de merde * pour aider à déterminer ceux qui sont à proximité.</string>
+    <string name="esponjas">éponges</string>
+    <string name="reloj">l\'horloge</string>
+    <string name="personajes">Personnages</string>
+    <string name="personajeelegido">personnage choisi</string>
+</resources>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.example.practica02_hypotenochas.MainActivityNuevo">
 
@@ -27,19 +27,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights">
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:adjustViewBounds="false"
-                        android:contentDescription="esponjas"
+                        android:contentDescription="@string/esponjas"
                         android:src="@drawable/bobmarcador" />
                 </LinearLayout>
 
@@ -55,10 +57,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:alpha="55"
-                        android:text="00"
+                        android:text="@string/contadorCero"
                         android:textAlignment="center"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="#fff"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -72,9 +74,9 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginRight="30dp"
-                    android:contentDescription="logo"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="30dp"
+                    android:contentDescription="@string/logo"
                     android:src="@drawable/logo" />
             </LinearLayout>
             <LinearLayout
@@ -82,20 +84,22 @@
                 android:layout_height="match_parent"
 
                 android:layout_weight="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="NestedWeights">
 
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:contentDescription="reloj"
+                        android:contentDescription="@string/reloj"
                         android:src="@drawable/reloj"
-                        android:layout_marginLeft="50dp"/>
+                        android:layout_marginStart="50dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -108,10 +112,10 @@
                         android:id="@+id/tiempo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="00:00"
+                        android:text="@string/temporizadorCero"
                         android:textAlignment="center"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="#fff"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"/>
@@ -126,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/black"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -134,7 +138,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:id="@+id/linearLayout2_1"
@@ -142,7 +147,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/black"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            tools:ignore="NestedWeights" />
 
         <LinearLayout
             android:id="@+id/tablero"
@@ -166,5 +172,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/black"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal" />
 </LinearLayout>
