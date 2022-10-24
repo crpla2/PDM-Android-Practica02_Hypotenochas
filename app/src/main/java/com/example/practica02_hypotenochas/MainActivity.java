@@ -1,11 +1,11 @@
 package com.example.practica02_hypotenochas;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     boolean recargado=false;
     int icon,casillas,minas;
     Drawable icono;
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
             minas=b.getInt("minas");
 
         }
-        Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),"Minas:"+minas, Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch ((item.getItemId())){

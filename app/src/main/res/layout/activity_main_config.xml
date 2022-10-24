@@ -33,7 +33,7 @@
             android:id="@+id/radioButtonPrincipiante"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="false"
+            android:checked="true"
             android:onClick="onRadioButtonClicked"
             android:text="@string/principiante"
             android:textSize="20sp"
@@ -59,12 +59,12 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/buttonVolver3"
+        android:id="@+id/buttonJugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
         android:onClick="onClickVolverConfig"
-        android:text="@string/volver"
+        android:text="@string/jugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

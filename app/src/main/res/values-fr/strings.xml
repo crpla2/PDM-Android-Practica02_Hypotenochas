@@ -15,4 +15,18 @@
     <string name="reloj">l\'horloge</string>
     <string name="personajes">Personnages</string>
     <string name="personajeelegido">personnage choisi</string>
+    <string-array name="personajes">
+        <item>Bob l\'Éponge</item>
+        <item>Sandy</item>
+        <item>M. le Calamar</item>
+        <item> M. Krabs</item>
+        <item>Patrick</item>
+        <item>Plancton</item>
+        <item>Gary</item>
+    </string-array>
+    <string name="instruccionesMenu">DES INSTRUCTIONS</string>
+    <string name="nuevo_juegoMenu">NOUVEAU JEU</string>
+    <string name="configuracionMenu">PARAMÈTRES</string>
+    <string name="personajeMenu">PERSONNAGE</string>
+    <string name="jugar">JOUER</string>
 </resources>

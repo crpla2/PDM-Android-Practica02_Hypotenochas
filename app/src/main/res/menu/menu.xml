@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:title="INSTRUCCIONES"
-        android:id="@+id/instrucciones"></item>
-    <item android:title="NUEVO JUEGO"
-        android:id="@+id/nuevo"></item>
-    <item android:title="CONFIGURACIÓN"
-        android:id="@+id/config"></item>
-    <item android:title="PERSONAJE"
+    <item
+        android:title="@string/instruccionesMenu"
+        android:id="@+id/instrucciones" />
+    <item
+        android:title="@string/nuevo_juegoMenu"
+        android:id="@+id/nuevo" />
+    <item
+        android:title="@string/configuracionMenu"
+        android:id="@+id/config" />
+    <item
+        android:title="@string/personajeMenu"
         android:id="@+id/perso"
         android:icon="@drawable/bob"
-        app:showAsAction="always"></item>
+        app:showAsAction="always" />
 </menu>

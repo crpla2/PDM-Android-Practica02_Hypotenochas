@@ -15,4 +15,18 @@
     <string name="reloj">clock</string>
     <string name="personajes">Characters</string>
     <string name="personajeelegido">chosen character</string>
+    <string-array name="personajes">
+        <item>SpongeBob</item>
+        <item>Sandy</item>
+        <item>Squidward</item>
+        <item>Mr. Krabs</item>
+        <item>Patrick</item>
+        <item>Plankton</item>
+        <item>Gary</item>
+    </string-array>
+    <string name="instruccionesMenu">INSTRUCTIONS</string>
+    <string name="nuevo_juegoMenu">NEW GAME</string>
+    <string name="configuracionMenu">SETTINGS</string>
+    <string name="personajeMenu">CHARACTER</string>
+    <string name="jugar">PLAY</string>
 </resources>
