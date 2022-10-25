@@ -3,17 +3,14 @@ package com.example.practica02_hypotenochas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.StringTokenizer;
 
 public class MainActivityWin extends AppCompatActivity {
     private Intent entrada;
     private Intent salida;
 
-    private TextView tvpuntos;
+    private TextView numPunt,numtiempo;
     private int puntuacion;
 
     private int icon;
@@ -23,7 +20,9 @@ public class MainActivityWin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_winner);
 
-        tvpuntos=findViewById(R.id.textViewpuntuacion);
+        numPunt=findViewById(R.id.tvPuntosNumeros);
+
+        numtiempo=findViewById(R.id.tvTiempoNumeros);
 
         entrada = getIntent();
         Bundle b = entrada.getExtras();
@@ -35,6 +34,7 @@ public class MainActivityWin extends AppCompatActivity {
 
         puntuacion=(int)(10000/(tiempoEnSegundos/10));
 
-        tvpuntos.setText("Puntuación: "+puntuacion+"\nTiempo: "+tiempo);
+        numPunt.setText(String.valueOf(puntuacion));
+        numtiempo.setText(tiempo);
     }
 }

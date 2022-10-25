@@ -21,6 +21,9 @@
     <string name="configuracionMenu">CONFIGURACIÓN</string>
     <string name="personajeMenu">PERSONAJE</string>
     <string name="jugar">JUGAR</string>
+    <string name="ganaste">¡Ganaste!</string>
+    <string name="puntuacion">Puntuación:</string>
+    <string name="tiempo">Tiempo:</string>
     <string-array name="personajes">
         <item>Bob Esponja</item>
         <item>Arenita</item>

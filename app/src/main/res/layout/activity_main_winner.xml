@@ -21,8 +21,37 @@
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235"
+        app:layout_constraintVertical_bias="0.223"
         app:srcCompat="@drawable/winner" />
+
+    <TextView
+        android:id="@+id/tvTiempo"
+        android:layout_width="122dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/tiempo"
+        android:textAlignment="textStart"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+
+    <TextView
+        android:id="@+id/tvTiempoNumeros"
+        android:layout_width="175dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="64dp"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
 
     <TextView
         android:id="@+id/textViewGanador"
@@ -30,7 +59,7 @@
         android:layout_height="75dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/bubblegum_sans"
-        android:text="¡Ganaste!"
+        android:text="@string/ganaste"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -44,12 +73,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewpuntuacion"
-        android:layout_width="255dp"
-        android:layout_height="113dp"
-        android:layout_marginTop="50dp"
+        android:id="@+id/tvPuntosNumeros"
+        android:layout_width="175dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="24dp"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+
+    <TextView
+        android:id="@+id/tvPuntos"
+        android:layout_width="160dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/puntuacion"
+        android:textAlignment="textStart"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
 

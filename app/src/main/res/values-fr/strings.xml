@@ -29,4 +29,7 @@
     <string name="configuracionMenu">PARAMÈTRES</string>
     <string name="personajeMenu">PERSONNAGE</string>
     <string name="jugar">JOUER</string>
+    <string name="ganaste">Tu as gagné!</string>
+    <string name="puntuacion">Points:</string>
+    <string name="tiempo">Drurée:</string>
 </resources>

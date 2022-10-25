@@ -29,4 +29,7 @@
     <string name="configuracionMenu">SETTINGS</string>
     <string name="personajeMenu">CHARACTER</string>
     <string name="jugar">PLAY</string>
+    <string name="ganaste">You win!</string>
+    <string name="puntuacion">Points:</string>
+    <string name="tiempo">Time:</string>
 </resources>
