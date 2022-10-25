@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
+    android:textAlignment="inherit"
     tools:context="com.example.practica02_hypotenochas.MainActivityNuevo">
 
     <Toolbar
@@ -22,13 +23,12 @@
             android:orientation="horizontal">
 
 
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -51,11 +51,11 @@
                     android:layout_weight="3"
                     android:orientation="vertical">
 
-
                     <TextView
                         android:id="@+id/minastv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
                         android:alpha="55"
                         android:text="@string/contadorCero"
                         android:textAlignment="center"
@@ -79,13 +79,13 @@
                     android:contentDescription="@string/logo"
                     android:src="@drawable/logo" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
                 android:layout_weight="2"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -97,9 +97,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:layout_marginStart="50dp"
                         android:contentDescription="@string/reloj"
-                        android:src="@drawable/reloj"
-                        android:layout_marginStart="50dp"/>
+                        android:src="@drawable/reloj" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,13 +112,14 @@
                         android:id="@+id/tiempo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
                         android:text="@string/temporizadorCero"
                         android:textAlignment="center"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -138,8 +139,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/linearLayout2_1"

@@ -24,10 +24,10 @@
         app:srcCompat="@drawable/looser" />
 
     <TextView
-        android:id="@+id/textViewtituloPerdedor"
+        android:id="@+id/textViewGanador"
         android:layout_width="357dp"
         android:layout_height="75dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/bubblegum_sans"
         android:text="¡Perdiste!"
         android:textAlignment="center"

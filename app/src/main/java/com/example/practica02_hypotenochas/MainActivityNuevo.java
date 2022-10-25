@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +20,18 @@ import java.util.TreeMap;
 public class MainActivityNuevo extends AppCompatActivity {
     Intent entrada;
     Intent salida;
-    int icon,casillas,numMinas;
+    int icon, casillas, numMinas;
     //
 
     int filasTablero;
     int destapadas;
-    //animaciones
+    int marcadas;
+    int encontradas;
+    //
+    Cronometro cronometro;
+    TextView tvcronometro;
+    String tiempoTranscurrido;
+    //
 
 
     //
@@ -52,24 +59,26 @@ public class MainActivityNuevo extends AppCompatActivity {
         setContentView(R.layout.activity_main_nuevo);
 
         entrada = getIntent();
-        Bundle b= entrada.getExtras();
-        icon=b.getInt("personaje");
-        if(b.getInt("casillas")==0){
-            casillas=64;
-            numMinas=10;
-        }else{
-            casillas=b.getInt("casillas");
-            numMinas=b.getInt("minas");
+        Bundle b = entrada.getExtras();
+        icon = b.getInt("personaje");
+        if (b.getInt("casillas") == 0) {
+            casillas = 64;
+            numMinas = 10;
+        } else {
+            casillas = b.getInt("casillas");
+            numMinas = b.getInt("minas");
         }
-        filasTablero= (int) Math.sqrt(casillas);
-        //Toast.makeText(getApplicationContext(),"Casillas:"+casillas, Toast.LENGTH_LONG).show();
-        //Toast.makeText(getApplicationContext(),"Minas:"+numMinas, Toast.LENGTH_LONG).show();
+        filasTablero = (int) Math.sqrt(casillas);
 
         tablero = findViewById(R.id.tablero);
         tablero.setOrientation(LinearLayout.HORIZONTAL);
         anadeLayouts();
         juego = new buscaBurgers(casillas, numMinas, filasTablero);
         tableroMinado = juego.generaTablero(casillas, numMinas);
+
+        tvcronometro = findViewById(R.id.tiempo);
+        cronometro = new Cronometro(tvcronometro);
+        new Thread(cronometro).start();
 
     }
 
@@ -118,16 +127,26 @@ public class MainActivityNuevo extends AppCompatActivity {
 
     private boolean onLongClick(View view) {
         if (!clicado) {
+            //marca una bomba
             view.setForeground(getResources().getDrawable(R.drawable.bobmarcador));
             clicado = true;
             view.setClickable(false);
-            if(juego.tieneMina(view.getId()))
-                destapadas++;
+            //comprobación de que la casilla marcada tiene una burguer debajo
+            if (juego.tieneMina(view.getId())) {
+                encontradas++;
+                //comprobación de que se haya ganado el juego
+                if (encontradas == numMinas) {
+                    victoria();
+                }
+            }
         } else {
-            view.setForeground(getResources().getDrawable(R.drawable.boton_frente));
-            clicado = false;
-            view.setClickable(true);
+            if (!juego.destapada(view.getId())) {
+                view.setForeground(null);
+                clicado = false;
+                view.setClickable(true);
+            }
         }
+
         return true;
     }
 
@@ -142,81 +161,109 @@ public class MainActivityNuevo extends AppCompatActivity {
      *             - Si es pulsado cualquier otro de los "n" botones cambia el color del botón seleccionado.
      */
     public void onClick(View view) {
-        if(view.isClickable()){
-        game = juego.descubreCasillas(view.getId());
-        //Se combrueba que la casilla seleccionada no contenga una bomba
-        for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
-            if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
-                Toast.makeText(getApplicationContext(), "Perdiste!!", Toast.LENGTH_LONG).show();
-                perdido = true;
-            }
-        }
-        //descubre las minas si hemos perdido
-        if (perdido) {
-            for (Map.Entry<Integer, Integer> minasEntry2 : tableroMinado.entrySet()) {
-                for (int i = 0; i < casillas; i++) {
-                    if ((minasEntry2.getKey() == (botones.get(i).getId())) && (minasEntry2.getValue() == 1)) {
-                        botones.get(i).setForeground(getDrawable(R.drawable.bomburguesa));
-                    }
+        if (view.isClickable()) {
+            game = juego.descubreCasillas(view.getId());
+            //Se combrueba que la casilla seleccionada no contenga una bomba
+            for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
+                if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
+                    perdido = true;
                 }
             }
-            //espera 0.2 segundos
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                setContentView(R.layout.activity_main_nuevo);
-                //espera 0.2 segundos
-
+            //descubre las minas si hemos perdido
+            if (perdido) {
+                cronometro.pause();
+                Handler handler = new Handler();
+                for (Map.Entry<Integer, Integer> minasEntry2 : tableroMinado.entrySet()) {
+                    for (int i = 0; i < casillas; i++) {
+                        int finalI = i;
+                        if ((minasEntry2.getKey() == (botones.get(finalI).getId())) && (minasEntry2.getValue() == 1)) {
+                            //efecto rippler
+                            botones.get(finalI).setForeground(getDrawable(R.drawable.efectto_pulsar));
+                            //espera 0.2 segundos
+                            handler.postDelayed(() ->
+                            {
+                                //descubre las bombas
+                                botones.get(finalI).setBackground(getDrawable(R.drawable.boton_fondo));
+                                botones.get(finalI).setForeground(getDrawable(R.drawable.bomburguesa));
+                                //fin espera
+                            }, 200);
+                        }
+                    }
+                }
+                //Espera 3 segundos
                 handler.postDelayed(() -> {
-                    salida = new Intent(this,MainActivity.class);
-                    startActivity(salida);
-
+                    //Muestra pantalla de perdedor
+                    setContentView(R.layout.activity_main_looser);
+                    //espera 2 segundos
+                    handler.postDelayed(() -> {
+                        //Ve a a inicio
+                        salida = new Intent(this, MainActivity.class);
+                        startActivity(salida);
+                        //fin espera
+                    }, 5000);
                     //fin espera
-                }, 5000);
-                //fin espera
-            }, 2000);
+                }, 3000);
 
 
-        } else {
-            //Se descubren las casillas y se escribe el numero de bombas adyacentes
-            for (Map.Entry<Integer, Integer> integerEntry : game.entrySet()) {
-                for (int i = 0; i < casillas; i++) {
-                    Button b = botones.get(i);
-                    if (b.getId() == integerEntry.getKey()) {
-                        //efecto Rippler
-                        b.setBackgroundResource(R.drawable.efectto_pulsar);
-                        //espera 0.2 segundos
-                        Handler handler = new Handler();
-                        handler.postDelayed(() -> {
-                            //cambio el fondo de los botones afectados
-                            b.setBackgroundResource(R.drawable.boton_fondo);
-                            //pon numeros en las casillas
-                            int valor = integerEntry.getValue();
-                            if (valor > 0) {
-                                b.setText(String.valueOf(integerEntry.getValue()));
-                                b.setTextSize(22);
-                                b.setTypeface(null, Typeface.BOLD);
-                                if (valor == 2) {
-                                    b.setTextColor(getResources().getColor(R.color.verde));
+            } else {
+                //Se descubren las casillas y se escribe el numero de bombas adyacentes
+
+                for (Map.Entry<Integer, Integer> integerEntry : game.entrySet()) {
+                    for (int i = 0; i < casillas; i++) {
+                        Button b = botones.get(i);
+                        if (b.getId() == integerEntry.getKey()) {
+                            //efecto Rippler
+                            b.setBackgroundResource(R.drawable.efectto_pulsar);
+                            //espera 0.2 segundos
+                            Handler handler = new Handler();
+                            handler.postDelayed(() -> {
+                                //cambio el fondo de los botones afectados
+                                b.setBackgroundResource(R.drawable.boton_fondo);
+                                //pon numeros en las casillas
+                                int valor = integerEntry.getValue();
+                                if (valor > 0) {
+                                    b.setText(String.valueOf(integerEntry.getValue()));
+                                    b.setTextSize(22);
+                                    b.setTypeface(null, Typeface.BOLD);
+                                    if (valor == 2) {
+                                        b.setTextColor(getResources().getColor(R.color.verde));
+                                    }
+                                    if (valor > 2) {
+                                        b.setTextColor(getResources().getColor(R.color.rojo));
+                                    }
                                 }
-                                if (valor > 2) {
-                                    b.setTextColor(getResources().getColor(R.color.rojo));
-                                }
-                            }
-                            //fin espera
-                        }, 200);
+                                //fin espera
+                            }, 200);
+                        }
                     }
                 }
             }
-        }
-        game.clear();
-        //comprobación de que se haya ganado el juego
-        if (buscaBurgers.destapadas.size() == casillas - numMinas) {
-            Toast.makeText(getApplicationContext(), "Ganaste!!" + destapadas, Toast.LENGTH_LONG).show();
-            ganado = true;
-        }
+            game.clear();
+            //comprobación de que se haya ganado el juego
+            if (buscaBurgers.destapadas.size() == casillas - numMinas) {
+                victoria();
+            }
         }
     }
 
+    public void victoria() {
+        ganado = true;
+        cronometro.pause();
+
+        Handler handler = new Handler();
+        //espera 3 segundos
+        handler.postDelayed(() -> {
+            //muestra pantalla ganador
+            setContentView(R.layout.activity_main_winner);
+            //espera 2 segundos
+            handler.postDelayed(() -> {
+                salida = new Intent(this, MainActivity.class);
+                startActivity(salida);
+                //fin espera
+            }, 5000);
+            //fin espera
+        }, 3000);
+    }
 
 
 }
