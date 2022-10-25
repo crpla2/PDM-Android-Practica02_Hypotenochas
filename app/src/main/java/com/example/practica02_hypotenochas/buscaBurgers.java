@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public class buscaBurgers {
     private TreeMap<Integer, Integer> tableroMinado;
     static ArrayList<Integer> destapadas;
-    private TreeMap<Integer, Integer> destapadasKey;
+    private final TreeMap<Integer, Integer> destapadasKey;
     int casillas;
     int numMinas;
     int filasTablero;
@@ -74,10 +74,7 @@ public class buscaBurgers {
         return resultado;
     }
     boolean destapada(int pos){
-        if(destapadas.contains(pos))
-            return true;
-
-        return false;
+        return destapadas.contains(pos);
     }
     /**
      * Método que calcula la posicion de las casillas adyacentes a una posición
@@ -95,49 +92,42 @@ public class buscaBurgers {
         // el ultimo registro)=>filaIzquierda=true;
         boolean filaIzquierda = false;
         for (int i = 1; i <= filas - 2; i++)
-            if (posicion == i * filas + 1)
+            if (posicion == i * filas + 1) {
                 filaIzquierda = true;
+                break;
+            }
         // primera fila exceptuando la primra y la ultima posición
         if (posicion < filas && posicion > 1) {
-            int adyacentes[] = {posicion - 1, posicion + 1, posicion + (filas - 1), posicion + filas,
+            return new int[]{posicion - 1, posicion + 1, posicion + (filas - 1), posicion + filas,
                     posicion + (filas + 1)};
-            return adyacentes;
             // primera posición de la cuadricula
         } else if (posicion == 1) {
-            int adyacentes[] = {posicion + 1, posicion + filas, posicion + (filas + 1)};
-            return adyacentes;
+            return new int[]{posicion + 1, posicion + filas, posicion + (filas + 1)};
             // última posición de la primera fila
         } else if (posicion == filas) {
-            int adyacentes[] = {posicion - 1, posicion + (filas - 1), posicion + filas};
-            return adyacentes;
+            return new int[]{posicion - 1, posicion + (filas - 1), posicion + filas};
             // última columna exceptuando la primera y la última posición
-        } else if (posicion % filas == 0 && posicion != filas && posicion != (filas * filas)) {
-            int adyacentes[] = {posicion - (filas + 1), posicion - filas, posicion - 1, posicion + (filas - 1),
+        } else if (posicion % filas == 0 && posicion != filas * filas) {
+            return new int[]{posicion - (filas + 1), posicion - filas, posicion - 1, posicion + (filas - 1),
                     posicion + filas};
-            return adyacentes;
             // última posición de la cuadricula
         } else if (posicion == (filas * filas)) {
-            int adyacentes[] = {posicion - (filas + 1), posicion - filas, posicion - 1};
-            return adyacentes;
+            return new int[]{posicion - (filas + 1), posicion - filas, posicion - 1};
             // última fila exceptuando la primera y la última posición.
         } else if (posicion > ((filas * filas) - (filas - 1)) && posicion < (filas * filas)) {
-            int adyacentes[] = {posicion - (filas + 1), posicion - filas, posicion - (filas - 1), posicion - 1,
+            return new int[]{posicion - (filas + 1), posicion - filas, posicion - (filas - 1), posicion - 1,
                     posicion + 1};
-            return adyacentes;
             // última posición de la primera columna
         } else if (posicion == ((filas * filas) - (filas - 1))) {
-            int adyacentes[] = {posicion - filas, posicion - (filas - 1), posicion + 1};
-            return adyacentes;
+            return new int[]{posicion - filas, posicion - (filas - 1), posicion + 1};
             // primera columna
         } else if (filaIzquierda) {
-            int adyacentes[] = {posicion - filas, posicion - (filas - 1), posicion + 1, posicion + filas,
+            return new int[]{posicion - filas, posicion - (filas - 1), posicion + 1, posicion + filas,
                     posicion + (filas + 1)};
-            return adyacentes;
         }
         // cualquier posición exceptuando las del perimetro.
-        int adyacentes[] = {posicion - (filas + 1), posicion - filas, posicion - (filas - 1), posicion - 1,
+        return new int[]{posicion - (filas + 1), posicion - filas, posicion - (filas - 1), posicion - 1,
                 posicion + 1, posicion + (filas - 1), posicion + filas, posicion + (filas + 1)};
-        return adyacentes;
     }
     /**
      * Método que genera un mapa cuyas claves serán las posiciónes en el tablero y
@@ -148,9 +138,9 @@ public class buscaBurgers {
      *                 tablero
      * @return (TreeMap) mapa con las posiciones y las minas asociadas.
      */
-    public TreeMap generaTablero(int casillas, int numMinas) {
+    public TreeMap<Integer,Integer> generaTablero(int casillas, int numMinas) {
         int minado = 0;
-        int tablero[] = new int[casillas];
+        int[] tablero = new int[casillas];
         TreeSet<Integer> minas = new TreeSet<>();
         tableroMinado = new TreeMap<>();
         // Se llena el array tablero con numeros del 1 a n (numero total de casillas).
@@ -161,12 +151,14 @@ public class buscaBurgers {
         while (minas.size() < numMinas)
             minas.add((int) (Math.random() * casillas + 1));
         // Se rellena el TreeMap
-        for (int i = 0; i < tablero.length; i++) {
+        for (int j : tablero) {
             for (int m : minas) {
-                if (m == tablero[i])
+                if (m == j) {
                     minado = 1;
+                    break;
+                }
             }
-            tableroMinado.put(tablero[i], minado);
+            tableroMinado.put(j, minado);
             minado = 0;
         }
         return tableroMinado;

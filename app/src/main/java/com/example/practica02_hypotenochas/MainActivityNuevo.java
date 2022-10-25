@@ -1,5 +1,6 @@
 package com.example.practica02_hypotenochas;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,7 +24,6 @@ public class MainActivityNuevo extends AppCompatActivity {
     //
 
     int filasTablero;
-    int destapadas;
     int marcadas;
     int encontradas;
     //
@@ -92,6 +91,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      * 9   10  11  12
      * 13  14  15  16
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void anadeLayouts() {
         int numBoton;
         for (int i = 0; i < filasTablero; i++) {
@@ -126,11 +126,12 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private boolean onLongClick(View view) {
         if (!clicado) {
             marcadas++;
             //marca una bomba
-            view.setForeground(getResources().getDrawable(R.drawable.bobmarcador));
+            view.setForeground(getResources().getDrawable(R.drawable.bobmarcador,getTheme()));
             clicado = true;
             view.setClickable(false);
             //comprobación de que la casilla marcada tiene una burguer debajo
@@ -165,6 +166,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      *             generado de forma altatoria.
      *             - Si es pulsado cualquier otro de los "n" botones cambia el color del botón seleccionado.
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void onClick(View view) {
         if (view.isClickable()) {
             game = juego.descubreCasillas(view.getId());
@@ -231,10 +233,10 @@ public class MainActivityNuevo extends AppCompatActivity {
                                     b.setTextSize(22);
                                     b.setTypeface(null, Typeface.BOLD);
                                     if (valor == 2) {
-                                        b.setTextColor(getResources().getColor(R.color.verde));
+                                        b.setTextColor(getResources().getColor(R.color.verde,getTheme()));
                                     }
                                     if (valor > 2) {
-                                        b.setTextColor(getResources().getColor(R.color.rojo));
+                                        b.setTextColor(getResources().getColor(R.color.rojo,getTheme()));
                                     }
                                 }
                                 //fin espera
@@ -265,6 +267,7 @@ public class MainActivityNuevo extends AppCompatActivity {
                 salida = new Intent(this, MainActivityWin.class);
                 salida.putExtra("personaje",icon);
                 salida.putExtra("tiempo",tiempoTranscurrido);
+                salida.putExtra("casillas",casillas);
                 startActivity(salida);
                 //fin espera
           //  }, 3000);

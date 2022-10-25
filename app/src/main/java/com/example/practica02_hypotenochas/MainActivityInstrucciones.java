@@ -9,19 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivityInstrucciones extends AppCompatActivity {
     //Intent entrada;
     Intent salida;
+
     //int icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_instrucciones);
-        //entrada = getIntent();
-        //Bundle b= entrada.getExtras();
-        //icon=b.getInt("personaje");
     }
 
-    public void onClickVolverInst(View view){
-        //salida = new Intent(this,MainActivity.class);
-        //salida.putExtra("personaje",icon);
+    public void onClickVolverInst(View view) {
         startActivity(salida);
     }
 }

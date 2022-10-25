@@ -1,5 +1,6 @@
 package com.example.practica02_hypotenochas;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class MainActivityConfig extends AppCompatActivity {
         setContentView(R.layout.activity_main_config);
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onRadioButtonClicked(View view){
         switch (view.getId()){
             case R.id.radioButtonPrincipiante:
@@ -24,11 +26,11 @@ public class MainActivityConfig extends AppCompatActivity {
                 break;
             case R.id.radioButtonAmateur:
                 casillas=144;
-                minas=30;
+                minas=3;
                 break;
             case R.id.radioButtonAvanzado:
                 casillas=256;
-                minas=60;
+                minas=6;
                 break;
         }Toast.makeText(getApplicationContext(),"Casillas:"+casillas+"Minas:"+minas, Toast.LENGTH_LONG).show();
 

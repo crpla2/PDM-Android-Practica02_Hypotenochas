@@ -62,25 +62,18 @@ public class Cronometro implements Runnable
                     // Modifico la UI
                     try
                     {
-                        escribirenUI.post(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                etiq.setText(salida);
-                            }
-                        });
+                        escribirenUI.post(() -> etiq.setText(salida));
                     }
                     catch (Exception e)
                     {
-                        Log.i("Cronometro", "Error en el cronometro al escribir en la UI: " + e.toString());
+                        Log.i("Cronometro", "Error en el cronometro al escribir en la UI: " + e);
                     }
                 }
             }
         }
         catch (InterruptedException e)
         {
-            Log.i("Cronometro", "Error en el cronometro: " + e.toString());
+            Log.i("Cronometro", "Error en el cronometro: " + e);
         }
     }
     public void reiniciar()
