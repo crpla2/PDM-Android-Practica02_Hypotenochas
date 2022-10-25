@@ -30,6 +30,7 @@ public class MainActivityNuevo extends AppCompatActivity {
     //
     Cronometro cronometro;
     TextView tvcronometro;
+    TextView tvminas;
     String tiempoTranscurrido;
     //
 
@@ -79,7 +80,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         tvcronometro = findViewById(R.id.tiempo);
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
-
+        tvminas = findViewById(R.id.minastv);
     }
 
     /**
@@ -127,6 +128,7 @@ public class MainActivityNuevo extends AppCompatActivity {
 
     private boolean onLongClick(View view) {
         if (!clicado) {
+            marcadas++;
             //marca una bomba
             view.setForeground(getResources().getDrawable(R.drawable.bobmarcador));
             clicado = true;
@@ -140,13 +142,16 @@ public class MainActivityNuevo extends AppCompatActivity {
                 }
             }
         } else {
+            if(!view.isClickable())
+                marcadas--;
             if (!juego.destapada(view.getId())) {
+
                 view.setForeground(null);
                 clicado = false;
                 view.setClickable(true);
             }
         }
-
+        tvminas.setText(String.valueOf(marcadas));
         return true;
     }
 
@@ -200,7 +205,7 @@ public class MainActivityNuevo extends AppCompatActivity {
                         salida = new Intent(this, MainActivity.class);
                         startActivity(salida);
                         //fin espera
-                    }, 5000);
+                    }, 3000);
                     //fin espera
                 }, 3000);
 
@@ -249,20 +254,23 @@ public class MainActivityNuevo extends AppCompatActivity {
     public void victoria() {
         ganado = true;
         cronometro.pause();
-
+        tiempoTranscurrido=String.valueOf(tvcronometro.getText());
         Handler handler = new Handler();
         //espera 3 segundos
-        handler.postDelayed(() -> {
+       // handler.postDelayed(() -> {
             //muestra pantalla ganador
-            setContentView(R.layout.activity_main_winner);
+            //setContentView(R.layout.activity_main_winner);
             //espera 2 segundos
             handler.postDelayed(() -> {
-                salida = new Intent(this, MainActivity.class);
+                salida = new Intent(this, MainActivityWin.class);
+                salida.putExtra("personaje",icon);
+                salida.putExtra("tiempo",tiempoTranscurrido);
                 startActivity(salida);
                 //fin espera
-            }, 5000);
+          //  }, 3000);
             //fin espera
         }, 3000);
+
     }
 
 
