@@ -63,7 +63,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         icon = b.getInt("personaje");
         if (b.getInt("casillas") == 0) {
             casillas = 64;
-            numMinas = 10;
+            numMinas = 1;
         } else {
             casillas = b.getInt("casillas");
             numMinas = b.getInt("minas");

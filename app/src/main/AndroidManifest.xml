@@ -27,6 +27,7 @@
         <activity android:name="com.example.practica02_hypotenochas.MainActivityPerso" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityInstrucciones" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityWin" />
+        <activity android:name="com.example.practica02_hypotenochas.MainActivityPoints" />
         <activity android:name="com.example.practica02_hypotenochas.MainActivityNuevo"
                   android:theme="@style/AppTheme.NoActionBar"/>
 

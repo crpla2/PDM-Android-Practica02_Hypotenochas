@@ -18,10 +18,10 @@
         android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/winner" />
 
     <TextView
@@ -37,7 +37,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacion" />
+
+    <TextView
+        android:id="@+id/tvPuntuacion"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="32dp"
+        android:text="Introduce tu nombre:"
+        android:textAlignment="textStart"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTiempo" />
 
     <TextView
         android:id="@+id/tvTiempoNumeros"
@@ -51,10 +65,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.889"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacion" />
 
     <TextView
-        android:id="@+id/textViewGanador"
+        android:id="@+id/textViewPuntuacion"
         android:layout_width="357dp"
         android:layout_height="75dp"
         android:layout_marginTop="40dp"
@@ -84,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacion" />
 
     <TextView
         android:id="@+id/tvPuntos"
@@ -99,6 +113,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGanador" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacion" />
+
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:layout_width="252dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Bob Esponja"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPuntuacion" />
+
+    <ImageButton
+        android:id="@+id/imageButtonDisquette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="aceptaNombre"
+        android:tint="#FF5722"
+        app:layout_constraintStart_toEndOf="@+id/editTextNombre"
+        app:layout_constraintTop_toBottomOf="@+id/tvPuntuacion"
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
