@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
         entrada = getIntent();
         Bundle b= entrada.getExtras();
 
-
-
         if (b != null) {
             recargado=true;
             icon=b.getInt("personaje");
@@ -50,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.instrucciones:
                 salida = new Intent(this,MainActivityInstrucciones.class);
                 startActivity(salida);
-
                 break;
             case R.id.nuevo:
                 salida = new Intent(this,MainActivityNuevo.class);
@@ -58,16 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 salida.putExtra("casillas",casillas);
                 salida.putExtra("minas",minas);
                 startActivity(salida);
-
                 break;
             case R.id.config:
                 salida = new Intent(this,MainActivityConfig.class);
                 salida.putExtra("personaje",icon);
                 startActivity(salida);
-
                 break;
             case R.id.perso:
                 salida = new Intent(this,MainActivityPerso.class);
+                startActivity(salida);
+                break;
+            case R.id.fama:
+                salida = new Intent(this,MainActivityPoints.class);
                 startActivity(salida);
                 break;
             default:

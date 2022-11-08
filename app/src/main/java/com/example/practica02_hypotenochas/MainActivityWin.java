@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
-public class MainActivityWin extends AppCompatActivity {
+public class MainActivityWin extends AppCompatActivity implements DialogoGenero.RespuestaDialogoGenero{
     private Intent salida;
     private Intent entrada;
 
@@ -28,7 +30,7 @@ public class MainActivityWin extends AppCompatActivity {
         numPunt=findViewById(R.id.tvPuntosNumeros);
 
         numtiempo=findViewById(R.id.tvTiempoNumeros);
-        ed=findViewById(R.id.editTextNombre);
+
 
         entrada = getIntent();
         Bundle b = entrada.getExtras();
@@ -46,14 +48,24 @@ public class MainActivityWin extends AppCompatActivity {
 
 
     }
-    public void aceptaNombre(View view){
-        if (!ed.getText().toString().isEmpty()){
-            salida = new Intent(this,MainActivityPoints.class);
-            salida.putExtra("puntos",numPunt.getText().toString());
-            salida.putExtra("tiempo",numtiempo.getText().toString());
-            salida.putExtra("nombre",ed.getText().toString());
-            salida.putExtra("icono",icon);
-            startActivity(salida);
-        }
+
+    @Override
+    public void onRespuesta(String s) {
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+        salida = new Intent(this,MainActivityPoints.class);
+        salida.putExtra("puntos",numPunt.getText().toString());
+        salida.putExtra("tiempo",numtiempo.getText().toString());
+        salida.putExtra("nombre",s);
+        salida.putExtra("icono",icon);
+        startActivity(salida);
     }
+    public void clic(View view){
+        DialogFragment dialogFragment= new DialogoGenero();
+        dialogFragment.show(getSupportFragmentManager(),"Mi dialogo");
+    }
+    public void clicSalir(View view){
+        salida = new Intent(this,MainActivity.class);
+        startActivity(salida);
+    }
+
 }

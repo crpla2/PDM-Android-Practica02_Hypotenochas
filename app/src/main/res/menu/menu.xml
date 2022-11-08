@@ -13,6 +13,9 @@
         android:title="@string/configuracionMenu"
         android:id="@+id/config" />
     <item
+        android:title="SALÓN DE LA FAMA"
+        android:id="@+id/fama" />
+    <item
         android:title="@string/personajeMenu"
         android:id="@+id/perso"
         android:icon="@drawable/bob"
