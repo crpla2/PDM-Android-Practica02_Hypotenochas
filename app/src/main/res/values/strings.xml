@@ -24,6 +24,7 @@
     <string name="ganaste">¡Ganaste!</string>
     <string name="puntuacion">Puntuación:</string>
     <string name="tiempo">Tiempo:</string>
+    <string name="Salon">SALÓN DE LA FAMA</string>
     <string-array name="personajes">
         <item>Bob Esponja</item>
         <item>Arenita</item>

@@ -80,6 +80,24 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
         tvminas = findViewById(R.id.minastv);
+
+        //Si no se descubren todas las minas en una hora se PIERDE
+        if(String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")){
+            derrota();
+        }
+
+    }
+    //Si la app pierde el foco se pausa el cronometro
+    @Override
+    protected void onStop() {
+        super.onStop();
+        cronometro.pause();
+    }
+    //Si volvemos a la app se reanuda el cronometro
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        cronometro.pause();
     }
 
     /**
@@ -178,39 +196,7 @@ public class MainActivityNuevo extends AppCompatActivity {
             }
             //descubre las minas si hemos perdido
             if (perdido) {
-                cronometro.pause();
-                Handler handler = new Handler();
-                for (Map.Entry<Integer, Integer> minasEntry2 : tableroMinado.entrySet()) {
-                    for (int i = 0; i < casillas; i++) {
-                        int finalI = i;
-                        if ((minasEntry2.getKey() == (botones.get(finalI).getId())) && (minasEntry2.getValue() == 1)) {
-                            //efecto rippler
-                            botones.get(finalI).setForeground(getDrawable(R.drawable.efectto_pulsar));
-                            //espera 0.2 segundos
-                            handler.postDelayed(() ->
-                            {
-                                //descubre las bombas
-                                botones.get(finalI).setBackground(getDrawable(R.drawable.boton_fondo));
-                                botones.get(finalI).setForeground(getDrawable(R.drawable.bomburguesa));
-                                //fin espera
-                            }, 200);
-                        }
-                    }
-                }
-                //Espera 3 segundos
-                handler.postDelayed(() -> {
-                    //Muestra pantalla de perdedor
-                    setContentView(R.layout.activity_main_looser);
-                    //espera 2 segundos
-                    handler.postDelayed(() -> {
-                        //Ve a a inicio
-                        salida = new Intent(this, MainActivity.class);
-                        startActivity(salida);
-                        //fin espera
-                    }, 3000);
-                    //fin espera
-                }, 3000);
-
+                derrota();
 
             } else {
                 //Se descubren las casillas y se escribe el numero de bombas adyacentes
@@ -258,19 +244,48 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro.pause();
         tiempoTranscurrido=String.valueOf(tvcronometro.getText());
         Handler handler = new Handler();
-        //espera 3 segundos
-       // handler.postDelayed(() -> {
-            //muestra pantalla ganador
-            //setContentView(R.layout.activity_main_winner);
-            //espera 2 segundos
-            handler.postDelayed(() -> {
+        //espera 2 segundos
+           handler.postDelayed(() -> {
                 salida = new Intent(this, MainActivityWin.class);
                 salida.putExtra("personaje",icon);
                 salida.putExtra("tiempo",tiempoTranscurrido);
                 salida.putExtra("casillas",casillas);
                 startActivity(salida);
                 //fin espera
-          //  }, 3000);
+        }, 2000);
+
+    }
+    public void derrota() {
+        cronometro.pause();
+        Handler handler = new Handler();
+        for (Map.Entry<Integer, Integer> minasEntry2 : tableroMinado.entrySet()) {
+            for (int i = 0; i < casillas; i++) {
+                int finalI = i;
+                if ((minasEntry2.getKey() == (botones.get(finalI).getId())) && (minasEntry2.getValue() == 1)) {
+                    //efecto rippler
+                    botones.get(finalI).setForeground(getDrawable(R.drawable.efectto_pulsar));
+                    //espera 0.2 segundos
+                    handler.postDelayed(() ->
+                    {
+                        //descubre las bombas
+                        botones.get(finalI).setBackground(getDrawable(R.drawable.boton_fondo));
+                        botones.get(finalI).setForeground(getDrawable(R.drawable.bomburguesa));
+                        //fin espera
+                    }, 200);
+                }
+            }
+        }
+        //Espera 3 segundos
+        handler.postDelayed(() -> {
+            //Muestra pantalla de perdedor
+            setContentView(R.layout.activity_main_looser);
+            //espera 2 segundos
+            handler.postDelayed(() -> {
+                //Ve a a inicio
+                salida = new Intent(this, MainActivity.class);
+                startActivity(salida);
+                //fin espera
+            }, 3000);
             //fin espera
         }, 3000);
 

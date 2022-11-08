@@ -51,7 +51,6 @@ public class MainActivityWin extends AppCompatActivity implements DialogoGenero.
 
     @Override
     public void onRespuesta(String s) {
-        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
         salida = new Intent(this,MainActivityPoints.class);
         salida.putExtra("puntos",numPunt.getText().toString());
         salida.putExtra("tiempo",numtiempo.getText().toString());

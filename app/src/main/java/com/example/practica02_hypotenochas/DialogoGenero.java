@@ -25,7 +25,7 @@ public class DialogoGenero extends DialogFragment {
         //1. Usamos la clase Builder para construir el dialogo
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         //2. Seteamos las carácteristicas(titulo)
-        builder.setTitle("Login");
+        builder.setTitle("Introduce tu nombre:");
        //Inflamos la vista
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.dialogo_layout, null);
@@ -35,7 +35,7 @@ public class DialogoGenero extends DialogFragment {
         nombre=v.findViewById(R.id.usuario);
 
         //3.Añadimos los botones (positivo,negativo,neutro)
-        builder.setPositiveButton("Nombre", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             String res="";
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

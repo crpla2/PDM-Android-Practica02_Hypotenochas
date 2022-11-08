@@ -59,6 +59,10 @@ public class Cronometro implements Runnable
                         salida += "0";
                     }
                     salida += segundos;
+                    // Por seguridad, como solo cuenta minutos,
+                    // antes de llegar a la hora de espera se reinicia el cronometro
+                    if (salida.equalsIgnoreCase("59:59"))
+                        reiniciar();
                     // Modifico la UI
                     try
                     {

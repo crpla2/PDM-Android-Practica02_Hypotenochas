@@ -4,8 +4,7 @@
    >
     <item
         android:title="@string/instruccionesMenu"
-        android:id="@+id/instrucciones"
-        />
+        android:id="@+id/instrucciones"/>
     <item
         android:title="@string/nuevo_juegoMenu"
         android:id="@+id/nuevo" />
@@ -13,11 +12,11 @@
         android:title="@string/configuracionMenu"
         android:id="@+id/config" />
     <item
-        android:title="SALÓN DE LA FAMA"
-        android:id="@+id/fama" />
-    <item
         android:title="@string/personajeMenu"
         android:id="@+id/perso"
         android:icon="@drawable/bob"
         app:showAsAction="always" />
+    <item
+        android:title="@string/Salon"
+        android:id="@+id/fama" />
 </menu>
