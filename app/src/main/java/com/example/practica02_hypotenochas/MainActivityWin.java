@@ -46,7 +46,7 @@ public class MainActivityWin extends AppCompatActivity implements DialogoGenero.
         numPunt.setText(String.valueOf(puntuacion));
         numtiempo.setText(tiempo);
 
-
+        System.out.println("icon:" + icon);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class MainActivityWin extends AppCompatActivity implements DialogoGenero.
         salida.putExtra("puntos",numPunt.getText().toString());
         salida.putExtra("tiempo",numtiempo.getText().toString());
         salida.putExtra("nombre",s);
-        salida.putExtra("icono",icon);
+        salida.putExtra("personaje",icon);
         startActivity(salida);
     }
     public void clic(View view){

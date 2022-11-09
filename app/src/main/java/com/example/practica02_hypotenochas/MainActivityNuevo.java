@@ -80,7 +80,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
         tvminas = findViewById(R.id.minastv);
-
+        System.out.println("icon:" + icon);
         //Si no se descubren todas las minas en una hora se PIERDE
         if(String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")){
             derrota();

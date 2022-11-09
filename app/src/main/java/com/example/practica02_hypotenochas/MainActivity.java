@@ -20,16 +20,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        icon=R.drawable.bob;
+
         entrada = getIntent();
         Bundle b= entrada.getExtras();
-
-        if (b != null) {
+                if (b != null) {
             recargado=true;
             icon=b.getInt("personaje");
             icono=getDrawable(icon);
             casillas=b.getInt("casillas");
             minas=b.getInt("minas");
         }
+
+        System.out.println("icon:" + icon);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

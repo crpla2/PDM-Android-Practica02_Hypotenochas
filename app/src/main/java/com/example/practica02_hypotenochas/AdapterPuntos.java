@@ -2,6 +2,7 @@ package com.example.practica02_hypotenochas;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
@@ -18,11 +19,12 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
 
         private final Context context;
         private final ArrayList<Jugador> lista;
-
+        Drawable drw;
         // Constructor
         public AdapterPuntos(Context context, ArrayList<Jugador> lista) {
             this.context = context;
             this.lista = lista;
+
         }
 
         @NonNull
@@ -30,6 +32,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             // to inflate the layout for each item of recycler view.
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
+
             return new ViewHolder(view);
         }
 
@@ -39,10 +42,12 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
 
             // to set data to textview and imageview of each card layout
             Jugador jugador = lista.get(position);
+            holder.tvPosicion.setText(String.valueOf(position+1+"º"));
             holder.tvNombre.setText(jugador.getNombre());
             holder.tvTiempo.setText(jugador.getTiempo());
             holder.tvPuntos.setText(jugador.getPuntos());
             holder.ivIcono.setImageResource(jugador.getIcon());
+            holder.tvNivel.setBackgroundResource(jugador.getNivel());
             //SpannableStringBuilder ssb = new SpannableStringBuilder(" ");
            // ssb.setSpan(new ImageSpan(context, jugador.getIcon()), 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
            // holder.tvNivel.setText(ssb, TextView.BufferType.SPANNABLE);
@@ -61,6 +66,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
             private final TextView tvTiempo;
             private final TextView tvPuntos;
             private final TextView tvNivel;
+            private final TextView tvPosicion;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -69,6 +75,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
                 tvTiempo = itemView.findViewById(R.id.tvTiempoCard);
                 tvPuntos=itemView.findViewById(R.id.tvPuntosCard);
                 tvNivel=itemView.findViewById(R.id.tvNivel);
+                tvPosicion=itemView.findViewById(R.id.textViewPosicion);
             }
         }
     }

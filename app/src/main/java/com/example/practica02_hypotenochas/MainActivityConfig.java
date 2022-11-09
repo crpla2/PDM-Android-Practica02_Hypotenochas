@@ -11,12 +11,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivityConfig extends AppCompatActivity {
-    Intent salida;
+    Intent salida,entrada;
     int icon,casillas,minas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_config);
+        entrada = getIntent();
+        Bundle b = entrada.getExtras();
+       icon = b.getInt("personaje");
+        System.out.println("icon:" + icon);
     }
 
     @SuppressLint("NonConstantResourceId")

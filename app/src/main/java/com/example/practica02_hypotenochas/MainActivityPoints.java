@@ -44,6 +44,7 @@ public class MainActivityPoints  extends AppCompatActivity {
         nombre = b.getString("nombre");
         casillas= b.getInt("casillas");
         }
+        System.out.println("icon:" + icon);
 /////////////////////////CARDVIEW/////////////////////////////////////////
         RecyclerView RV = findViewById(R.id.RVPuntos);
         ArrayList<Jugador> lista = new ArrayList<Jugador>();
@@ -72,27 +73,19 @@ public class MainActivityPoints  extends AppCompatActivity {
         //añadimos la informacion a la base de datos
         if(b!=null)//comprobacion de que no venimos de la pantalla inicial
             db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'"+nivel+"',+'"+icon+"')");
-        //mostramos el resultado en el text view
-        /////////////////////////CARDVIEW/////////////////////////////////////////
-       // String result = "";
-        /////////////////////////////////////////////////
-        Cursor c = null;
 
+        Cursor c = null;
         try {
             c = db.rawQuery("SELECT * FROM bdPuntuacion ORDER BY Puntos DESC", null);
             while (c.moveToNext())
-               // result = result + "\n" + c.getString(0) + "\t\t\t\t\t" + c.getString(1) + "\t\t\t" + c.getString(2)+"\n";
-                lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(c.getInt(3)),
-                        c.getInt(c.getInt(4))));
-
+               lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                        c.getInt(4)));
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
             c.close();
         }
-        /////////////////////////CARDVIEW/////////////////////////////////////////
-       // tv.setText(result);
-//////////////////////////////////////////////////////
+
 
         AdapterPuntos adapter = new AdapterPuntos(this, lista);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -111,10 +104,18 @@ public class MainActivityPoints  extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        if ((item.getItemId())==R.id.salir){
-            salida=new Intent(this,MainActivity.class);
-            startActivity(salida);
+        switch (item.getItemId()){
+            case R.id.salir:
+                salida=new Intent(this,MainActivity.class);
+                startActivity(salida);
+                break;
+
+            default:
+                break;
         }
+
+
+
         return true;
     }
     @Override
