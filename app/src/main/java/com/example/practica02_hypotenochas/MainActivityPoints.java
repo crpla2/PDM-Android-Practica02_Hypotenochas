@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class MainActivityPoints  extends AppCompatActivity {
     private Intent entrada,salida;
@@ -26,60 +31,73 @@ public class MainActivityPoints  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_puntuacion);
-        tv = findViewById(R.id.tvPuntuacion);
+/////////////////CARDVIEW////////////////////////////////////////////
+        // tv = findViewById(R.id.tvPuntuacion);
+//////////////////////////////////////////////////////////////////
+
         entrada = getIntent();
         Bundle b = entrada.getExtras();
         if(b!=null){
-        icon = b.getInt("personaje");
+        icon =b.getInt("personaje");
         puntos = b.getString("puntos");
         tiempo = b.getString("tiempo");
         nombre = b.getString("nombre");
         casillas= b.getInt("casillas");
         }
-
-        /*
-            USAR UN CARDVIEW PARA VER LA PUNTUACIÓN!!!!!!!!!
-         */
-        String nivel;
+/////////////////////////CARDVIEW/////////////////////////////////////////
+        RecyclerView RV = findViewById(R.id.RVPuntos);
+        ArrayList<Jugador> lista = new ArrayList<Jugador>();
+/////////////////////////////////////////////////////////////////////////
+        int nivel;
         switch (casillas){
-
             case 144:
-                nivel="Amateur";
+                nivel=R.drawable.plata;
                 break;
             case 256:
-                nivel="Principiante";
+                nivel=R.drawable.oro;
                 break;
             default:
-                nivel="Principiante";
+                nivel=R.drawable.bronce;
                 break;
         }
-        /*PARA BORRAR LA BASE DE DATOS:
-        //deleteDatabase("Puntos");
-        */
+        /*PARA BORRAR LA BASE DE DATOS:*/
+       // deleteDatabase("Puntos");
+
+
+
         //Creamos la base de datos y la tabla SI NO EXISTEN!!!
 
         db = openOrCreateDatabase("Puntos", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos VARCHAR,Tiempo VARCHAR,Nivel VARCHAR,Icono INTEGER);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos VARCHAR,Tiempo VARCHAR,Nivel INTEGER,Icono INTEGER);");
         //añadimos la informacion a la base de datos
         if(b!=null)//comprobacion de que no venimos de la pantalla inicial
             db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'"+nivel+"',+'"+icon+"')");
         //mostramos el resultado en el text view
-        String result = "";
+        /////////////////////////CARDVIEW/////////////////////////////////////////
+       // String result = "";
+        /////////////////////////////////////////////////
         Cursor c = null;
 
         try {
             c = db.rawQuery("SELECT * FROM bdPuntuacion ORDER BY Puntos DESC", null);
             while (c.moveToNext())
-                result = result + "\n" + c.getString(0) + "\t\t\t\t\t" + c.getString(1) + "\t\t\t" + c.getString(2)+"\n";
-
+               // result = result + "\n" + c.getString(0) + "\t\t\t\t\t" + c.getString(1) + "\t\t\t" + c.getString(2)+"\n";
+                lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(c.getInt(3)),
+                        c.getInt(c.getInt(4))));
 
         } catch (Exception e) {
-            result = e.toString();
+            System.out.println(e.toString());
         } finally {
             c.close();
         }
-        tv.setText(result);
+        /////////////////////////CARDVIEW/////////////////////////////////////////
+       // tv.setText(result);
+//////////////////////////////////////////////////////
 
+        AdapterPuntos adapter = new AdapterPuntos(this, lista);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RV.setLayoutManager(linearLayoutManager);
+        RV.setAdapter(adapter);
     }
 
     @Override

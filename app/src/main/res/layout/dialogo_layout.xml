@@ -11,8 +11,9 @@
         android:layout_height="match_parent"
         android:layout_margin="50dp"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Bob esponja"
         android:inputType="text"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/orange" />
 
 </LinearLayout>
