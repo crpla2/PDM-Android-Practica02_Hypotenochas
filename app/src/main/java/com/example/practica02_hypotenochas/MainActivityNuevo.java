@@ -80,7 +80,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
         tvminas = findViewById(R.id.minastv);
-        System.out.println("icon:" + icon);
+
         //Si no se descubren todas las minas en una hora se PIERDE
         if(String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")){
             derrota();
@@ -109,7 +109,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      * 9   10  11  12
      * 13  14  15  16
      */
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     private void anadeLayouts() {
         int numBoton;
         for (int i = 0; i < filasTablero; i++) {
@@ -131,7 +131,7 @@ public class MainActivityNuevo extends AppCompatActivity {
 
                 button.setId(numBoton);
                 numBoton += filasTablero;
-                button.setBackground(getDrawable(R.drawable.boton_frente));
+                button.setBackgroundResource(R.drawable.boton_frente);
 
                 button.setOnClickListener(this::onClick);
                 button.setOnLongClickListener(this::onLongClick);
@@ -246,6 +246,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         Handler handler = new Handler();
         //espera 2 segundos
            handler.postDelayed(() -> {
+               System.out.println("nuevo"+casillas);
                 salida = new Intent(this, MainActivityWin.class);
                 salida.putExtra("personaje",icon);
                 salida.putExtra("tiempo",tiempoTranscurrido);

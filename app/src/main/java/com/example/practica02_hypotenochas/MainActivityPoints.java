@@ -44,7 +44,7 @@ public class MainActivityPoints  extends AppCompatActivity {
         nombre = b.getString("nombre");
         casillas= b.getInt("casillas");
         }
-        System.out.println("icon:" + icon);
+
 /////////////////////////CARDVIEW/////////////////////////////////////////
         RecyclerView RV = findViewById(R.id.RVPuntos);
         ArrayList<Jugador> lista = new ArrayList<Jugador>();
@@ -64,7 +64,8 @@ public class MainActivityPoints  extends AppCompatActivity {
         /*PARA BORRAR LA BASE DE DATOS:*/
        // deleteDatabase("Puntos");
 
-
+        System.out.println(casillas);
+System.out.println(nivel);
 
         //Creamos la base de datos y la tabla SI NO EXISTEN!!!
 
@@ -76,6 +77,11 @@ public class MainActivityPoints  extends AppCompatActivity {
 
         Cursor c = null;
         try {
+
+            //PRI     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230843 ORDER BY Puntos DESC", null);
+            //AMA    c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230950 ORDER BY Puntos DESC", null);
+         //AVA      c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230847 ORDER BY Puntos DESC", null);
+//
             c = db.rawQuery("SELECT * FROM bdPuntuacion ORDER BY Puntos DESC", null);
             while (c.moveToNext())
                lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
@@ -104,16 +110,74 @@ public class MainActivityPoints  extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        RecyclerView RV = findViewById(R.id.RVPuntos);
+        ArrayList<Jugador> lista = new ArrayList<Jugador>();
+        Cursor c = null;
         switch (item.getItemId()){
             case R.id.salir:
                 salida=new Intent(this,MainActivity.class);
                 startActivity(salida);
                 break;
+            case R.id.basura:
 
+                deleteDatabase("Puntos");
+                salida=new Intent(this,MainActivityPoints.class);
+                startActivity(salida);
+                break;
+            case R.id.pri:
+
+                try {
+
+                    c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230843 ORDER BY Puntos DESC", null);
+                    while (c.moveToNext())
+                        lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                                c.getInt(4)));
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                } finally {
+                    c.close();
+                }
+
+
+                break;
+            case R.id.ama:
+                try {
+
+                    c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230951 ORDER BY Puntos DESC", null);
+                    while (c.moveToNext())
+                        lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                                c.getInt(4)));
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                } finally {
+                    c.close();
+                }
+                break;
+            case R.id.ava:
+ try {
+
+                c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230948 ORDER BY Puntos DESC", null);
+                while (c.moveToNext())
+                    lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                            c.getInt(4)));
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            } finally {
+                c.close();
+            }
+                break;
+            case R.id.all:
+                salida=new Intent(this,MainActivityPoints.class);
+                startActivity(salida);
+                break;
             default:
+                ;
                 break;
         }
-
+        AdapterPuntos adapter = new AdapterPuntos(this, lista);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RV.setLayoutManager(linearLayoutManager);
+        RV.setAdapter(adapter);
 
 
         return true;
@@ -123,4 +187,5 @@ public class MainActivityPoints  extends AppCompatActivity {
         db.close();
         super.onDestroy();
     }
+
 }

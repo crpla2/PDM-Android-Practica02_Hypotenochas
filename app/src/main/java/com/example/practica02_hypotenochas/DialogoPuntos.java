@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import androidx.fragment.app.DialogFragment;
 
-public class DialogoGenero extends DialogFragment {
+public class DialogoPuntos extends DialogFragment {
     RespuestaDialogoGenero respuesta;
     EditText nombre;
 

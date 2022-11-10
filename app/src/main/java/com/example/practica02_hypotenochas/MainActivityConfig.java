@@ -20,7 +20,7 @@ public class MainActivityConfig extends AppCompatActivity {
         entrada = getIntent();
         Bundle b = entrada.getExtras();
        icon = b.getInt("personaje");
-        System.out.println("icon:" + icon);
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -42,7 +42,7 @@ public class MainActivityConfig extends AppCompatActivity {
 
     }
     public void onClickVolverConfig(View view){
-
+        System.out.println(casillas);
         salida = new Intent(this,MainActivityNuevo.class);
         salida.putExtra("personaje",icon);
         salida.putExtra("casillas",casillas);

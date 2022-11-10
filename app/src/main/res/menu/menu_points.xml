@@ -2,11 +2,44 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
     <item
-        android:title="SALIR"
-        android:id="@+id/salir"
-        android:icon="@drawable/casa"
+        android:title="basura"
+        android:id="@+id/basura"
+        android:icon="@drawable/borrar"
         app:showAsAction="always" />
+    <item
+        android:title=" "
+        android:id="@+id/espacio"
+        app:showAsAction="always" />
+    <item
+        android:title="marcador"
+        android:id="@+id/marcador"
+        android:icon="@drawable/copa"
+        app:showAsAction="always" >
+        <menu>
+            <item
+            android:title="principiante "
+            android:id="@+id/pri"
+            android:icon="@drawable/bronce"/>
+            <item
+                android:title=" amateur"
+                android:id="@+id/ama"
+                android:icon="@drawable/plata"/>
+            <item
+                android:title=" avanzado"
+                android:id="@+id/ava"
+                android:icon="@drawable/oro"/>
+            <item
+                android:title=" "
+                android:id="@+id/all"
+                android:icon="@drawable/medallas"/>
+        </menu>
+
+    </item>
+    <item
+    android:title="SALIR"
+    android:id="@+id/salir"
+    android:icon="@drawable/casa"
+    app:showAsAction="always" />
 </menu>
 

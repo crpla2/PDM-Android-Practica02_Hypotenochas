@@ -48,9 +48,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
             holder.tvPuntos.setText(jugador.getPuntos());
             holder.ivIcono.setImageResource(jugador.getIcon());
             holder.tvNivel.setBackgroundResource(jugador.getNivel());
-            //SpannableStringBuilder ssb = new SpannableStringBuilder(" ");
-           // ssb.setSpan(new ImageSpan(context, jugador.getIcon()), 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-           // holder.tvNivel.setText(ssb, TextView.BufferType.SPANNABLE);
+
         }
 
         @Override

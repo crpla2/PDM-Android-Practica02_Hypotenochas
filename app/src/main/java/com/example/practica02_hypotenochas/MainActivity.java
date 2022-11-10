@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
             minas=b.getInt("minas");
         }
 
-        System.out.println("icon:" + icon);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

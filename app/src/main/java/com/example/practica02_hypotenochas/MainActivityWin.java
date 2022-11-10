@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-public class MainActivityWin extends AppCompatActivity implements DialogoGenero.RespuestaDialogoGenero{
+public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.RespuestaDialogoGenero{
     private Intent salida;
     private Intent entrada;
 
@@ -46,7 +45,7 @@ public class MainActivityWin extends AppCompatActivity implements DialogoGenero.
         numPunt.setText(String.valueOf(puntuacion));
         numtiempo.setText(tiempo);
 
-        System.out.println("icon:" + icon);
+
     }
 
     @Override
@@ -56,10 +55,11 @@ public class MainActivityWin extends AppCompatActivity implements DialogoGenero.
         salida.putExtra("tiempo",numtiempo.getText().toString());
         salida.putExtra("nombre",s);
         salida.putExtra("personaje",icon);
+        salida.putExtra("casillas",casillas);
         startActivity(salida);
     }
     public void clic(View view){
-        DialogFragment dialogFragment= new DialogoGenero();
+        DialogFragment dialogFragment= new DialogoPuntos();
         dialogFragment.show(getSupportFragmentManager(),"Mi dialogo");
     }
     public void clicSalir(View view){
