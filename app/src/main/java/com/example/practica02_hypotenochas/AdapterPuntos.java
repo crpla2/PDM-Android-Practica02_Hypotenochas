@@ -39,7 +39,6 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
             // to set data to textview and imageview of each card layout
             Jugador jugador = lista.get(position);
             holder.tvPosicion.setText(String.valueOf(position+1+"º"));
@@ -47,7 +46,20 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
             holder.tvTiempo.setText(jugador.getTiempo());
             holder.tvPuntos.setText(jugador.getPuntos());
             holder.ivIcono.setImageResource(jugador.getIcon());
-            holder.tvNivel.setBackgroundResource(jugador.getNivel());
+            System.out.println(jugador.getNivel());
+
+            switch (jugador.getNivel()){
+                case 64:
+                    holder.tvNivel.setBackgroundResource(R.drawable.bronce);
+                    break;
+                case 144:
+                    holder.tvNivel.setBackgroundResource(R.drawable.plata);
+                    break;
+                case 256:
+                    holder.tvNivel.setBackgroundResource(R.drawable.oro);
+                    break;
+            }
+
 
         }
 

@@ -190,6 +190,7 @@ public class MainActivityNuevo extends AppCompatActivity {
             game = juego.descubreCasillas(view.getId());
             //Se combrueba que la casilla seleccionada no contenga una bomba
             for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
+
                 if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
                     perdido = true;
                 }
