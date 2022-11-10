@@ -2,6 +2,7 @@ package com.example.practica02_hypotenochas;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,16 +12,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivityPoints  extends AppCompatActivity {
-    private Intent entrada,salida;
+public class MainActivityPoints extends AppCompatActivity {
+    private Intent entrada, salida;
     private TextView tv;
     private int icon;
     private String puntos;
@@ -28,6 +32,7 @@ public class MainActivityPoints  extends AppCompatActivity {
     private String nombre;
     private int casillas;
     private SQLiteDatabase db;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_puntuacion);
@@ -37,12 +42,12 @@ public class MainActivityPoints  extends AppCompatActivity {
 
         entrada = getIntent();
         Bundle b = entrada.getExtras();
-        if(b!=null){
-        icon =b.getInt("personaje");
-        puntos = b.getString("puntos");
-        tiempo = b.getString("tiempo");
-        nombre = b.getString("nombre");
-        casillas= b.getInt("casillas");
+        if (b != null) {
+            icon = b.getInt("personaje");
+            puntos = b.getString("puntos");
+            tiempo = b.getString("tiempo");
+            nombre = b.getString("nombre");
+            casillas = b.getInt("casillas");
         }
 
 /////////////////////////CARDVIEW/////////////////////////////////////////
@@ -50,41 +55,41 @@ public class MainActivityPoints  extends AppCompatActivity {
         ArrayList<Jugador> lista = new ArrayList<Jugador>();
 /////////////////////////////////////////////////////////////////////////
         int nivel;
-        switch (casillas){
+        switch (casillas) {
             case 144:
-                nivel=R.drawable.plata;
+                nivel = R.drawable.plata;
                 break;
             case 256:
-                nivel=R.drawable.oro;
+                nivel = R.drawable.oro;
                 break;
             default:
-                nivel=R.drawable.bronce;
+                nivel = R.drawable.bronce;
                 break;
         }
         /*PARA BORRAR LA BASE DE DATOS:*/
-       // deleteDatabase("Puntos");
+        // deleteDatabase("Puntos");
 
         System.out.println(casillas);
-System.out.println(nivel);
+        System.out.println(nivel);
 
         //Creamos la base de datos y la tabla SI NO EXISTEN!!!
 
         db = openOrCreateDatabase("Puntos", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos VARCHAR,Tiempo VARCHAR,Nivel INTEGER,Icono INTEGER);");
         //añadimos la informacion a la base de datos
-        if(b!=null)//comprobacion de que no venimos de la pantalla inicial
-            db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'"+nivel+"',+'"+icon+"')");
+        if (b != null)//comprobacion de que no venimos de la pantalla inicial
+            db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'" + nivel + "',+'" + icon + "')");
 
         Cursor c = null;
         try {
 
             //PRI     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230843 ORDER BY Puntos DESC", null);
             //AMA    c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230950 ORDER BY Puntos DESC", null);
-         //AVA      c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230847 ORDER BY Puntos DESC", null);
+            //AVA      c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230847 ORDER BY Puntos DESC", null);
 //
             c = db.rawQuery("SELECT * FROM bdPuntuacion ORDER BY Puntos DESC", null);
             while (c.moveToNext())
-               lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
                         c.getInt(4)));
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -100,7 +105,7 @@ System.out.println(nivel);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         //Inflamos el menu
         getMenuInflater().inflate(R.menu.menu_points, menu);
 
@@ -109,28 +114,51 @@ System.out.println(nivel);
 
     @SuppressLint("NonConstantResourceId")
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        salida = new Intent(this, MainActivityPoints.class);
         RecyclerView RV = findViewById(R.id.RVPuntos);
         ArrayList<Jugador> lista = new ArrayList<Jugador>();
         Cursor c = null;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.salir:
-                salida=new Intent(this,MainActivity.class);
+                salida = new Intent(this, MainActivity.class);
                 startActivity(salida);
                 break;
             case R.id.basura:
+                //Dialogo de alerta que salta para confirmar el borrado de la base de datos
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("\t\t¡ATENCIÓN!");
+                alertDialog.setIcon(R.drawable.atencion);
+                alertDialog.setMessage("Se borrarán todas las puntuaciones.\n¿Desea continuar?");
 
-                deleteDatabase("Puntos");
-                salida=new Intent(this,MainActivityPoints.class);
-                startActivity(salida);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+
+                alertDialog.setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Borrado de la base de datos
+                                deleteDatabase("Puntos");
+                                //Recarga de la pantalla para visualizar los datos borrados
+                                startActivity(salida);
+                            }
+                        });
+                alertDialog.setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //recarga de la pantalla para visualizar los datos
+                                startActivity(salida);
+                                dialog.cancel();
+                            }
+                        });
+                alertDialog.show();
                 break;
             case R.id.pri:
-
                 try {
-
                     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230843 ORDER BY Puntos DESC", null);
                     while (c.moveToNext())
-                        lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
                                 c.getInt(4)));
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -138,14 +166,12 @@ System.out.println(nivel);
                     c.close();
                 }
 
-
                 break;
             case R.id.ama:
                 try {
-
                     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230951 ORDER BY Puntos DESC", null);
                     while (c.moveToNext())
-                        lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
+                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
                                 c.getInt(4)));
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -154,20 +180,20 @@ System.out.println(nivel);
                 }
                 break;
             case R.id.ava:
- try {
+                try {
 
-                c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230948 ORDER BY Puntos DESC", null);
-                while (c.moveToNext())
-                    lista.add(new Jugador(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),
-                            c.getInt(4)));
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            } finally {
-                c.close();
-            }
+                    c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=2131230948 ORDER BY Puntos DESC", null);
+                    while (c.moveToNext())
+                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
+                                c.getInt(4)));
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                } finally {
+                    c.close();
+                }
                 break;
             case R.id.all:
-                salida=new Intent(this,MainActivityPoints.class);
+                salida = new Intent(this, MainActivityPoints.class);
                 startActivity(salida);
                 break;
             default:
@@ -182,6 +208,7 @@ System.out.println(nivel);
 
         return true;
     }
+
     @Override
     protected void onDestroy() {
         db.close();

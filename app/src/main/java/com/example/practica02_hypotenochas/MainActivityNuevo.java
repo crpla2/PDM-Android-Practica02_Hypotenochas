@@ -63,7 +63,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         icon = b.getInt("personaje");
         if (b.getInt("casillas") == 0) {
             casillas = 64;
-            numMinas = 1;
+            numMinas = 10;
         } else {
             casillas = b.getInt("casillas");
             numMinas = b.getInt("minas");
@@ -239,6 +239,9 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     */
     public void victoria() {
         ganado = true;
         cronometro.pause();
@@ -256,6 +259,10 @@ public class MainActivityNuevo extends AppCompatActivity {
         }, 2000);
 
     }
+
+    /**
+     *
+     */
     public void derrota() {
         cronometro.pause();
         Handler handler = new Handler();

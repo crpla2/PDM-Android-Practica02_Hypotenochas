@@ -28,15 +28,15 @@ public class MainActivityConfig extends AppCompatActivity {
         switch (view.getId()){
             case R.id.radioButtonPrincipiante:
                 casillas=64;
-                minas=1;
+                minas=10;
                 break;
             case R.id.radioButtonAmateur:
                 casillas=144;
-                minas=3;
+                minas=30;
                 break;
             case R.id.radioButtonAvanzado:
                 casillas=256;
-                minas=6;
+                minas=60;
                 break;
         }Toast.makeText(getApplicationContext(),"Casillas:"+casillas+"Minas:"+minas, Toast.LENGTH_LONG).show();
 
