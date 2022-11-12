@@ -50,7 +50,7 @@ public class DialogoPuntos extends DialogFragment {
 
     //Interfaz para la comunicación entre la actividad y el fragmento doialogo
     public interface RespuestaDialogoGenero{
-        public void onRespuesta(String s);
+        void onRespuesta(String s);
     }
     //se invoca cuando el fragmento se añade a la actividad
 

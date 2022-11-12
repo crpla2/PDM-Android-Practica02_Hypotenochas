@@ -6,13 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +23,7 @@ public class MainActivityPoints extends AppCompatActivity {
     private Intent entrada, salida;
     private TextView tv;
     private int icon;
-    private String puntos;
+    private int puntos;
     private String tiempo;
     private String nombre;
     private int casillas;
@@ -40,7 +36,7 @@ public class MainActivityPoints extends AppCompatActivity {
         Bundle b = entrada.getExtras();
         if (b != null) {
             icon = b.getInt("personaje");
-            puntos = b.getString("puntos");
+            puntos = b.getInt("puntos");
             tiempo = b.getString("tiempo");
             nombre = b.getString("nombre");
             casillas = b.getInt("casillas");
@@ -54,7 +50,7 @@ public class MainActivityPoints extends AppCompatActivity {
         //Creamos la base de datos y la tabla SI NO EXISTEN!!!
 
         db = openOrCreateDatabase("Puntos", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos VARCHAR,Tiempo VARCHAR,Nivel INTEGER,Icono INTEGER);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos INTEGER,Tiempo VARCHAR,Nivel INTEGER,Icono INTEGER);");
         //añadimos la informacion a la base de datos
         if (b != null)//comprobacion de que no venimos de la pantalla inicial
             db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'" + casillas + "',+'" + icon + "')");
@@ -63,10 +59,10 @@ public class MainActivityPoints extends AppCompatActivity {
         try {
             c = db.rawQuery("SELECT * FROM bdPuntuacion ORDER BY Puntos DESC", null);
             while (c.moveToNext())
-                lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
+                lista.add(new Jugador(c.getString(0), c.getInt(1), c.getString(2), c.getInt(3),
                         c.getInt(4)));
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
         } finally {
             c.close();
         }
@@ -132,10 +128,10 @@ public class MainActivityPoints extends AppCompatActivity {
                 try {
                     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=64 ORDER BY Puntos DESC", null);
                     while (c.moveToNext())
-                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
+                        lista.add(new Jugador(c.getString(0), c.getInt(1), c.getString(2), c.getInt(3),
                                 c.getInt(4)));
                 } catch (Exception e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 } finally {
                     c.close();
                 }
@@ -145,10 +141,10 @@ public class MainActivityPoints extends AppCompatActivity {
                 try {
                     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=144 ORDER BY Puntos DESC", null);
                     while (c.moveToNext())
-                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
+                        lista.add(new Jugador(c.getString(0), c.getInt(1), c.getString(2), c.getInt(3),
                                 c.getInt(4)));
                 } catch (Exception e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 } finally {
                     c.close();
                 }
@@ -158,10 +154,10 @@ public class MainActivityPoints extends AppCompatActivity {
 
                     c = db.rawQuery("SELECT * FROM bdPuntuacion WHERE Nivel=256 ORDER BY Puntos DESC", null);
                     while (c.moveToNext())
-                        lista.add(new Jugador(c.getString(0), c.getString(1), c.getString(2), c.getInt(3),
+                        lista.add(new Jugador(c.getString(0), c.getInt(1), c.getString(2), c.getInt(3),
                                 c.getInt(4)));
                 } catch (Exception e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 } finally {
                     c.close();
                 }
@@ -171,7 +167,6 @@ public class MainActivityPoints extends AppCompatActivity {
                 startActivity(salida);
                 break;
             default:
-                ;
                 break;
         }
         //Cargamos la pantalla con los datos filtrados

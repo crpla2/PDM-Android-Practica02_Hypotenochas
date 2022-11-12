@@ -41,10 +41,10 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
 
             // to set data to textview and imageview of each card layout
             Jugador jugador = lista.get(position);
-            holder.tvPosicion.setText(String.valueOf(position+1+"º"));
+            holder.tvPosicion.setText(position + 1 + "º");
             holder.tvNombre.setText(jugador.getNombre());
             holder.tvTiempo.setText(jugador.getTiempo());
-            holder.tvPuntos.setText(jugador.getPuntos());
+            holder.tvPuntos.setText(String.valueOf(jugador.getPuntos()));
             holder.ivIcono.setImageResource(jugador.getIcon());
             System.out.println(jugador.getNivel());
 

@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Clase que define el comportamiento de la pantalla "nuevo juego"
+ */
 public class MainActivityNuevo extends AppCompatActivity {
     Intent entrada;
     Intent salida;
@@ -42,12 +45,12 @@ public class MainActivityNuevo extends AppCompatActivity {
     boolean perdido = false;
     boolean ganado = false;
     //
-    boolean clicado = false;
+
 
     List<Button> botones = new ArrayList<>();
 
     /**
-     * Clase que almacena los datos de la actividad, sirve para colocar el código de inicialización.
+     * Método que almacena los datos de la actividad, sirve para colocar el código de inicialización.
      * Almacena la lógica básica de inicio de la aplicación que debería suceder solo una vez
      * durante toda la vida de la actividad.
      *
@@ -80,20 +83,29 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
         tvminas = findViewById(R.id.minastv);
-
+        marcadas=numMinas;
+        tvminas.setText(String.valueOf(marcadas));
         //Si no se descubren todas las minas en una hora se PIERDE
-        if(String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")){
+        if (String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")) {
             derrota();
         }
 
     }
-    //Si la app pierde el foco se pausa el cronometro
+
+    /**
+     * Método que define que ocurre cuando la catividad pierde el foco.
+     * En este caso se pausa el cronómetro.
+     */
     @Override
     protected void onStop() {
         super.onStop();
         cronometro.pause();
     }
-    //Si volvemos a la app se reanuda el cronometro
+
+    /**
+     * Método que define que ocurre cuando la catividad recupera el foco.
+     * En este caso se reanuda el cronómetro.
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -101,7 +113,7 @@ public class MainActivityNuevo extends AppCompatActivity {
     }
 
     /**
-     * Clase que genera los layouts correspondientes para generar una cuadricula  donde
+     * Método que genera los layouts correspondientes para generar una cuadricula  donde
      * se añadirán los botones generados automáticamente mediante dos "For" anidados.
      * Se le asigna un id a cada botón que corresponde con la variable (int)numBoton.
      * Los id se asignan de izquierda a derecha por filas:    1   2   3   4
@@ -144,31 +156,40 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    /**
+     * Método que define el comportamiento ante una pulsación larga.
+     * En este caso marca la casilla donde creemos que hay una
+     * cangreburguer si no ha sido marcada anteriormente, en
+     * ese caso la desmarcaría.
+     *
+     * @param view recibe como parametro un objeto del tipo View.
+     *             En este caso será el boton pulsado.
+     * @return devuelve true cuando se ha producido una pulación larga.
+     */
     private boolean onLongClick(View view) {
-        if (!clicado) {
-            marcadas++;
-            //marca una bomba
-            view.setForeground(getResources().getDrawable(R.drawable.bobmarcador,getTheme()));
-            clicado = true;
-            view.setClickable(false);
-            //comprobación de que la casilla marcada tiene una burguer debajo
-            if (juego.tieneMina(view.getId())) {
-                encontradas++;
-                //comprobación de que se haya ganado el juego
-                if (encontradas == numMinas) {
-                    victoria();
+        //Si no ha sido marcada anteriormente
+        if (view.isClickable()) {
+            //Si no ha sido destapada
+            if (!juego.destapada(view.getId())) {
+                marcadas--;
+                //marca una posible bomba
+                view.setForeground(getResources().getDrawable(R.drawable.bobmarcador, getTheme()));
+                //definela como marcada
+                view.setClickable(false);
+                //comprobación de que la casilla marcada tiene una burguer debajo
+                if (juego.tieneMina(view.getId())) {
+                    encontradas++;
+                    //comprobación de que se haya ganado el juego
+                    if (encontradas == numMinas) {
+                        victoria();
+                    }
                 }
             }
-        } else {
-            if(!view.isClickable())
-                marcadas--;
-            if (!juego.destapada(view.getId())) {
-
-                view.setForeground(null);
-                clicado = false;
-                view.setClickable(true);
-            }
+        } else {//Si está marcada
+            if (!view.isClickable())
+                marcadas++;
+            view.setForeground(null);
+            view.setClickable(true);
         }
         tvminas.setText(String.valueOf(marcadas));
         return true;
@@ -184,13 +205,23 @@ public class MainActivityNuevo extends AppCompatActivity {
      *             generado de forma altatoria.
      *             - Si es pulsado cualquier otro de los "n" botones cambia el color del botón seleccionado.
      */
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     public void onClick(View view) {
+        //Si no ha sido marcada
         if (view.isClickable()) {
             game = juego.descubreCasillas(view.getId());
+            //bucle que impide que se pueda iniciar una partida destapando una bomba
+            while (buscaBurgers.destapadas.size() == 0) {
+                //Se combrueba que la casilla seleccionada no contenga una bomba
+                for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
+                    if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
+                        tableroMinado = juego.generaTablero(casillas, numMinas);
+                        this.onClick(view);
+                    }
+                }
+            }
             //Se combrueba que la casilla seleccionada no contenga una bomba
             for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
-
                 if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
                     perdido = true;
                 }
@@ -206,28 +237,30 @@ public class MainActivityNuevo extends AppCompatActivity {
                     for (int i = 0; i < casillas; i++) {
                         Button b = botones.get(i);
                         if (b.getId() == integerEntry.getKey()) {
-                            //efecto Rippler
-                            b.setBackgroundResource(R.drawable.efectto_pulsar);
-                            //espera 0.2 segundos
-                            Handler handler = new Handler();
-                            handler.postDelayed(() -> {
-                                //cambio el fondo de los botones afectados
-                                b.setBackgroundResource(R.drawable.boton_fondo);
-                                //pon numeros en las casillas
-                                int valor = integerEntry.getValue();
-                                if (valor > 0) {
-                                    b.setText(String.valueOf(integerEntry.getValue()));
-                                    b.setTextSize(22);
-                                    b.setTypeface(null, Typeface.BOLD);
-                                    if (valor == 2) {
-                                        b.setTextColor(getResources().getColor(R.color.verde,getTheme()));
+                            if (b.isClickable()) {
+                                //efecto Rippler
+                                b.setBackgroundResource(R.drawable.efectto_pulsar);
+                                //espera 0.2 segundos
+                                Handler handler = new Handler();
+                                handler.postDelayed(() -> {
+                                    //cambio el fondo de los botones afectados
+                                    b.setBackgroundResource(R.drawable.boton_fondo);
+                                    //pon numeros en las casillas
+                                    int valor = integerEntry.getValue();
+                                    if (valor > 0) {
+                                        b.setText(String.valueOf(integerEntry.getValue()));
+                                        b.setTextSize(22);
+                                        b.setTypeface(null, Typeface.BOLD);
+                                        if (valor == 2) {
+                                            b.setTextColor(getResources().getColor(R.color.verde, getTheme()));
+                                        }
+                                        if (valor > 2) {
+                                            b.setTextColor(getResources().getColor(R.color.rojo, getTheme()));
+                                        }
                                     }
-                                    if (valor > 2) {
-                                        b.setTextColor(getResources().getColor(R.color.rojo,getTheme()));
-                                    }
-                                }
-                                //fin espera
-                            }, 200);
+                                    //fin espera
+                                }, 200);
+                            }
                         }
                     }
                 }
@@ -240,23 +273,28 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
+    public void volver(View view) {
+        salida = new Intent(this, MainActivity.class);
+        startActivity(salida);
+    }
+
     /**
      *
      */
     public void victoria() {
         ganado = true;
         cronometro.pause();
-        tiempoTranscurrido=String.valueOf(tvcronometro.getText());
+        tiempoTranscurrido = String.valueOf(tvcronometro.getText());
         Handler handler = new Handler();
         //espera 2 segundos
-           handler.postDelayed(() -> {
-               System.out.println("nuevo"+casillas);
-                salida = new Intent(this, MainActivityWin.class);
-                salida.putExtra("personaje",icon);
-                salida.putExtra("tiempo",tiempoTranscurrido);
-                salida.putExtra("casillas",casillas);
-                startActivity(salida);
-                //fin espera
+        handler.postDelayed(() -> {
+            System.out.println("nuevo" + casillas);
+            salida = new Intent(this, MainActivityWin.class);
+            salida.putExtra("personaje", icon);
+            salida.putExtra("tiempo", tiempoTranscurrido);
+            salida.putExtra("casillas", casillas);
+            startActivity(salida);
+            //fin espera
         }, 2000);
 
     }

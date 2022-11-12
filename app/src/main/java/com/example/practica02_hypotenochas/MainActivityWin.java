@@ -51,7 +51,7 @@ public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.
     @Override
     public void onRespuesta(String s) {
         salida = new Intent(this,MainActivityPoints.class);
-        salida.putExtra("puntos",numPunt.getText().toString());
+        salida.putExtra("puntos",puntuacion);
         salida.putExtra("tiempo",numtiempo.getText().toString());
         salida.putExtra("nombre",s);
         salida.putExtra("personaje",icon);

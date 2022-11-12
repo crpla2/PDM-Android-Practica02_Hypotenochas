@@ -7,9 +7,9 @@ import android.widget.TextView;
 public class Cronometro implements Runnable
 {
     // Atributos privados de la clase
-    private TextView etiq; // Etiqueta para mostrar la información
+    private final TextView etiq; // Etiqueta para mostrar la información
     private int segundos, minutos; // Segundos, minutos y horas que lleva activo el cronómetro
-    private Handler escribirenUI; // Necesario para modificar la UI
+    private final Handler escribirenUI; // Necesario para modificar la UI
     private Boolean pausado; // Para pausar el cronómetro
     private String salida; // Salida formateada de los datos del cronómetro
 

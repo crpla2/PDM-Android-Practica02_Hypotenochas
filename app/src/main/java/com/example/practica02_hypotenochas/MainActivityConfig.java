@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ *
+ */
 public class MainActivityConfig extends AppCompatActivity {
     Intent salida,entrada;
     int icon,casillas,minas;
@@ -22,6 +25,7 @@ public class MainActivityConfig extends AppCompatActivity {
        icon = b.getInt("personaje");
 
     }
+
 
     @SuppressLint("NonConstantResourceId")
     public void onRadioButtonClicked(View view){
@@ -57,7 +61,7 @@ public class MainActivityConfig extends AppCompatActivity {
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if ((item.getItemId())==R.id.salir){

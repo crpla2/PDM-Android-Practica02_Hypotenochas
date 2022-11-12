@@ -4,13 +4,13 @@ import android.graphics.drawable.Drawable;
 
 public class Jugador {
     private int icon;
-    private String puntos;
+    private int puntos;
     private String tiempo;
     private String nombre;
     private int nivel;
 
         // Constructor
-        public Jugador(String nombre, String puntos, String tiempo, int nivel,int icon) {
+        public Jugador(String nombre, int puntos, String tiempo, int nivel,int icon) {
             this.nombre =nombre ;
             this.puntos = puntos;
             this.tiempo = tiempo;
@@ -28,10 +28,10 @@ public class Jugador {
             this.nombre = nombre;
         }
 
-        public String getPuntos() {
+        public int getPuntos() {
             return puntos;
         }
-        public void setPuntos(String puntos) {
+        public void setPuntos(int puntos) {
             this.puntos = puntos;
         }
 
