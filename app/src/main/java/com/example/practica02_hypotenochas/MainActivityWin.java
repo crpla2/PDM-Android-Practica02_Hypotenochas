@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Clase que define la pantalla win
+ */
 public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.RespuestaDialogoPuntos {
     private Intent salida;
     private Intent entrada;
@@ -16,7 +19,6 @@ public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.
     private TextView numPunt, numtiempo;
 
     private int puntuacion;
-
     private int icon;
     private int casillas;
 
@@ -44,9 +46,11 @@ public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.
         String tiempo = b.getString("tiempo");
         casillas = b.getInt("casillas");
 
+        //Recibo el tiempo como String y lo paso a double para calcular los puntos
         String[] split = tiempo.split(":");
         double tiempoEnSegundos = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
 
+        //Calculo la puntuación
         puntuacion = (int) (10000 / (tiempoEnSegundos / 10) * (casillas / 10));
 
         numPunt.setText(String.valueOf(puntuacion));
@@ -55,6 +59,10 @@ public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.
 
     }
 
+    /**
+     * Metodo que recibe la respuesta del dialogo y manda los datos a la pantalla de puntuación
+     * @param s La respuesta del dialogo (String)
+     */
     @Override
     public void onRespuesta(String s) {
         salida = new Intent(this, MainActivityPoints.class);
@@ -64,17 +72,27 @@ public class MainActivityWin extends AppCompatActivity implements DialogoPuntos.
         salida.putExtra("personaje", icon);
         salida.putExtra("casillas", casillas);
         startActivity(salida);
+        //Transicion de derecha a izquierda
         overridePendingTransition(R.anim.left_in, R.anim.left_out);
     }
 
+    /**
+     * Metodo que abre el dialogo para guardar los puntos
+     * @param view
+     */
     public void clic(View view) {
         DialogFragment dialogFragment = new DialogoPuntos();
         dialogFragment.show(getSupportFragmentManager(), "Mi dialogo");
     }
 
+    /**
+     * Metodo que define el composratmiento del boton salir.
+     * @param view
+     */
     public void clicSalir(View view) {
         salida = new Intent(this, MainActivity.class);
         startActivity(salida);
+        //Transicion de izquierda a derecha
         overridePendingTransition(R.anim.right_in, R.anim.right_out);
     }
 

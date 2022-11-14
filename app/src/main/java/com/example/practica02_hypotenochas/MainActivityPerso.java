@@ -12,9 +12,11 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Clase que define la pantalla Personajes
+ */
 public class MainActivityPerso extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Spinner spn;
     private ImageView iv;
     Intent salida;
 
@@ -28,23 +30,23 @@ public class MainActivityPerso extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_personajes);
-
-        inicioXML();
-        darClic();
-    }
-
-    private void inicioXML() {
-        spn = findViewById(R.id.spinnerPersonajes);
+        Spinner spn = findViewById(R.id.spinnerPersonajes);
         iv = findViewById(R.id.imageViewPersonaje);
-    }
 
-    private void darClic() {
+       //Seteamos la lista del spinner
         spn.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.personajes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn.setAdapter(adapter);
     }
 
+    /**
+     * Metodo que define el comportamiento del spinner
+     * @param parent hace referencia al padre
+     * @param view hace referencia a la vista
+     * @param pos recibe como parametro el elemento seleccionado
+     * @param id id del elemento seleccionado
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         salida = new Intent(this, MainActivity.class);
@@ -81,22 +83,23 @@ public class MainActivityPerso extends AppCompatActivity implements AdapterView.
             default:
                 break;
         }
-
-        // Toast.makeText(getApplicationContext(),parent.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-
-
     }
 
+    /**
+     * Metodo que define que si no hay un elemento del spinner seleccionado no hace nada
+     * @param parent hace referencia al padre
+     */
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent) {}
 
-    }
-
-
+    /**
+     * Metodo que define el comportamiento del imagebutton
+     * @param view recibe como parametro el boton
+     */
     public void onClickVolverPerso(View view) {
         startActivity(salida);
+        //transicion de izquierda a derecha
         overridePendingTransition(R.anim.right_in, R.anim.right_out);
-
     }
 
     /**
@@ -124,6 +127,7 @@ public class MainActivityPerso extends AppCompatActivity implements AdapterView.
             //Abre la pantalla de inicio
             salida = new Intent(this, MainActivity.class);
             startActivity(salida);
+            //transicion de izquierda a derecha
             overridePendingTransition(R.anim.right_in, R.anim.right_out);
         }
         return true;

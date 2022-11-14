@@ -76,7 +76,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         cronometro = new Cronometro(tvcronometro);
         new Thread(cronometro).start();
         tvminas = findViewById(R.id.minastv);
-        marcadas=numMinas;
+        marcadas = numMinas;
         tvminas.setText(String.valueOf(marcadas));
         //Si no se descubren todas las minas en una hora se PIERDE
         if (String.valueOf(tvcronometro.getText()).equalsIgnoreCase("59:59")) {
@@ -110,9 +110,9 @@ public class MainActivityNuevo extends AppCompatActivity {
      * se añadirán los botones generados automáticamente mediante dos "For" anidados.
      * Se le asigna un id a cada botón que corresponde con la variable (int)numBoton.
      * Los id se asignan de izquierda a derecha por filas:    1   2   3   4
-     * 5   6   7   8
-     * 9   10  11  12
-     * 13  14  15  16
+     *                                                        5   6   7   8
+     *                                                        9   10  11  12
+     *                                                        13  14  15  16
      */
 
     private void anadeLayouts() {
@@ -265,14 +265,20 @@ public class MainActivityNuevo extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo que define el comportamiento del boton volver (piña).
+     *
+     * @param view recibe como parametro el boton
+     */
     public void volver(View view) {
         salida = new Intent(this, MainActivity.class);
         startActivity(salida);
+        //transicion de izquierda a derecha
         overridePendingTransition(R.anim.right_in, R.anim.right_out);
     }
 
     /**
-     *
+     * Metodo que define el compoprtamiento cuando se gana el juego
      */
     public void victoria() {
         ganado = true;
@@ -287,14 +293,14 @@ public class MainActivityNuevo extends AppCompatActivity {
             salida.putExtra("tiempo", tiempoTranscurrido);
             salida.putExtra("casillas", casillas);
             startActivity(salida);
+            //transicion difuminado
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             //fin espera
         }, 3000);
-
     }
 
     /**
-     *
+     * Metodo que define el comportamiento cuando se pierde el juego
      */
     public void derrota() {
         cronometro.pause();
@@ -321,11 +327,8 @@ public class MainActivityNuevo extends AppCompatActivity {
             //Muestra pantalla de perdedor
             salida = new Intent(this, MainActivityLooser.class);
             startActivity(salida);
+            //transición de difuminado
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }, 3000);
-
-
     }
-
-
 }

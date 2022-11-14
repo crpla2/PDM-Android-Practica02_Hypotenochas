@@ -18,7 +18,7 @@ public class Jugador {
      * @param puntos Puntos realizados(int)
      * @param tiempo Tiempo utilizado (String)
      * @param nivel  Nivel de la partida (int)
-     * @param icon   Icono del personaje con el que ha jugado (icon)
+     * @param icon   Icono del personaje con el que ha jugado (int)
      */
     public Jugador(String nombre, int puntos, String tiempo, int nivel, int icon) {
         this.nombre = nombre;

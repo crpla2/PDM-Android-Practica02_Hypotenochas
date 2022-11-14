@@ -29,8 +29,8 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
     }
 
     /**
-     Metodo que sirve para inflar el layout con cada elemento del reciclerview
-    */
+     * Metodo que sirve para inflar el layout con cada elemento del reciclerview
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,7 +39,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
     }
 
     /**
-      Metodo que sirve para setear los datos de los textview y de los imageview de los card layout
+     * Metodo que sirve para setear los datos de los textview y de los imageview de los card layout
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -65,7 +65,7 @@ public class AdapterPuntos extends RecyclerView.Adapter<AdapterPuntos.ViewHolder
     }
 
     /**
-      Metodo que devuelve el número de elementos card del reciclerview
+     * Metodo que devuelve el número de elementos card del reciclerview
      */
     @Override
     public int getItemCount() {

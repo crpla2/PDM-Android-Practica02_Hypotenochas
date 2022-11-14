@@ -20,7 +20,7 @@ public class DialogoPuntos extends DialogFragment {
     EditText nombre;
 
     /**
-      Constructor, se llamará cuando hagamos show(), de la clase DialogFragment.
+     * Constructor, se llamará cuando hagamos show(), de la clase DialogFragment.
      */
     @NonNull
     @Override
@@ -51,12 +51,18 @@ public class DialogoPuntos extends DialogFragment {
         return builder.create();
     }
 
-    //Interfaz para la comunicación entre la actividad y el fragmento doialogo
+    /**
+     * Interfaz para la comunicación entre la actividad y el fragmento dialogo
+     */
     public interface RespuestaDialogoPuntos {
         void onRespuesta(String s);
     }
 
-    //se invoca cuando el fragmento se añade a la actividad
+    /**
+     * se invoca cuando el fragmento se añade a la actividad
+     *
+     * @param activity la actividad
+     */
     @Override
     public void onAttach(@NonNull Context activity) {
         super.onAttach(activity);

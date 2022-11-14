@@ -62,6 +62,7 @@ public class MainActivityConfig extends AppCompatActivity {
 
     /**
      * Metodo que define el comportamiento del boton jugar
+     *
      * @param view recibe el boton pulsado
      */
     public void onClickJugarConfig(View view) {
@@ -72,6 +73,7 @@ public class MainActivityConfig extends AppCompatActivity {
         salida.putExtra("casillas", casillas);
         salida.putExtra("minas", minas);
         startActivity(salida);
+        //transicion zoom
         overridePendingTransition(R.anim.jump, R.anim.jump_out);
     }
 
@@ -100,6 +102,7 @@ public class MainActivityConfig extends AppCompatActivity {
             //Abre la pantalla de inicio
             salida = new Intent(this, MainActivity.class);
             startActivity(salida);
+            //transicion de izquierda a derecha
             overridePendingTransition(R.anim.right_in, R.anim.right_out);
         }
         return true;

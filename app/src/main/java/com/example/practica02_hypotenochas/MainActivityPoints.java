@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que define la pantalla de puntuaciones
+ */
 public class MainActivityPoints extends AppCompatActivity {
     private Intent salida;
     private int icon;
@@ -46,15 +49,33 @@ public class MainActivityPoints extends AppCompatActivity {
             casillas = b.getInt("casillas");
         }
 
-
         RecyclerView RV = findViewById(R.id.RVPuntos);
         ArrayList<Jugador> lista = new ArrayList<>();
-
 
         //Creamos la base de datos y la tabla SI NO EXISTEN!!!
         db = openOrCreateDatabase("Puntos", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS bdPuntuacion(Nombre VARCHAR,Puntos INTEGER,Tiempo VARCHAR,Nivel INTEGER,Icono INTEGER);");
-        //añadimos la informacion a la base de datos
+
+        //Compruebo si la base de datos está vacía
+        int registros = 0;
+        try (Cursor x = db.rawQuery("SELECT count(*) FROM bdPuntuacion", null)) {
+            if (x.moveToNext())
+                registros = x.getInt(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        //Si está vacía
+        if (registros == 0) {
+            //Meto datos predefinidos
+            int bob = R.drawable.bob;
+            int calamardo = R.drawable.calamardo;
+            int patricio = R.drawable.patricio;
+            db.execSQL("INSERT INTO bdPuntuacion VALUES('BOB',+'10000',+'10:00',+'256',+'" + bob + "')");
+            db.execSQL("INSERT INTO bdPuntuacion VALUES('CALAMARDO',+'1000',+'05:00',+'144',+'" + calamardo + "')");
+            db.execSQL("INSERT INTO bdPuntuacion VALUES('PATRICIO',+'100',+'03:00',+'64',+'" + patricio + "')");
+        }
+
+        //añadimos la informacion recibida a la base de datos
         if (b != null)//comprobacion de que no venimos de la pantalla inicial
             db.execSQL("INSERT INTO bdPuntuacion VALUES('" + nombre + "',+'" + puntos + "',+'" + tiempo + "',+'" + casillas + "',+'" + icon + "')");
 
@@ -66,22 +87,28 @@ public class MainActivityPoints extends AppCompatActivity {
             System.out.println(e.getMessage());
         }
 
-
+        //Cargamos los datos en la pantalla
         AdapterPuntos adapter = new AdapterPuntos(lista);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         RV.setLayoutManager(linearLayoutManager);
         RV.setAdapter(adapter);
     }
 
-    @Override
-    /*
-      Metodo que sirve para inflar el menu en el layout
+    /**
+     * Metodo que sirve para inflar el menu en el layout
      */
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_points, menu);
         return true;
     }
 
+    /**
+     * Metodo que define el comportamiento del menu
+     *
+     * @param item recibe el menuitem seleccionado
+     * @return (boolean) devuelve true cuando un item ha sido seleccionado.
+     */
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -93,6 +120,7 @@ public class MainActivityPoints extends AppCompatActivity {
             case R.id.salir:
                 salida = new Intent(this, MainActivity.class);
                 startActivity(salida);
+                //Transicion de izquierda a derecha
                 overridePendingTransition(R.anim.right_in, R.anim.right_out);
                 break;
             case R.id.basura:

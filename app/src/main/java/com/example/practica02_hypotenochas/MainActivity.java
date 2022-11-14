@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Metodo para inflar el menu
+     *
      * @param menu recibe como parametro un recurso de menu
      * @return (boolean) devuelve true cuando se crea
      */
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 //Abre la pantalla de instruciones
                 salida = new Intent(this, MainActivityInstrucciones.class);
                 startActivity(salida);
+                //transicion de derecha a izquierda
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 break;
             case R.id.nuevo:
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 salida.putExtra("casillas", casillas);
                 salida.putExtra("minas", minas);
                 startActivity(salida);
+                //transicion zoom
                 overridePendingTransition(R.anim.jump, R.anim.jump_out);
                 break;
             case R.id.config:
@@ -91,20 +94,22 @@ public class MainActivity extends AppCompatActivity {
                 //Envío de información al intent de destino
                 salida.putExtra("personaje", icon);
                 startActivity(salida);
+                //transicion de derecha a izquierda
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 break;
             case R.id.perso:
                 //Abre la pantalla de elección de personajes
                 salida = new Intent(this, MainActivityPerso.class);
                 startActivity(salida);
+                //transicion de derecha a izquierda
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 break;
             case R.id.fama:
                 //Abre la pantalla de marcadores
                 salida = new Intent(this, MainActivityPoints.class);
                 startActivity(salida);
+                //transicion de derecha a izquierda
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
-
                 break;
             default:
                 break;

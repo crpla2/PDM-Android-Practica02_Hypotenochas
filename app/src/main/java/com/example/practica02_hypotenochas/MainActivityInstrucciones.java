@@ -51,6 +51,7 @@ public class MainActivityInstrucciones extends AppCompatActivity {
             //Abre la pantalla de inincio
             salida = new Intent(this, MainActivity.class);
             startActivity(salida);
+            //transicion de izquierda a derecha
             overridePendingTransition(R.anim.right_in, R.anim.right_out);
         }
         return true;
