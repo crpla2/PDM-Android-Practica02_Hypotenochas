@@ -4,28 +4,43 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+/**
+ * CLase que contiene la lógica del juego.
+ */
 public class buscaBurgers {
     private TreeMap<Integer, Integer> tableroMinado;
-    static ArrayList<Integer> destapadas;
+    private static ArrayList<Integer> destapadas;
     private final TreeMap<Integer, Integer> destapadasKey;
-    int casillas;
-    int numMinas;
-    int filasTablero;
+    private final int filasTablero;
 
-
-    public buscaBurgers(int casillas, int numMinas, int filasTablero) {
+    /**
+     * Constructor
+     *
+     * @param filasTablero recibe el número de filas que tiene el tablero como un entero.
+     */
+    public buscaBurgers(int filasTablero) {
         super();
-        this.casillas = casillas;
-        this.numMinas = numMinas;
         this.filasTablero = filasTablero;
         tableroMinado = new TreeMap<>();
         destapadas = new ArrayList<>();
         destapadasKey = new TreeMap<>();
     }
+
     /**
+     * Metodo getter de la lista de destapadas
      *
-     * @param posicion
-     * @return
+     * @return devuelve un arraylista con la posición de las casillas destapadas.
+     */
+    public ArrayList<Integer> getDestapadas() {
+        return destapadas;
+    }
+
+    /**
+     * Metodo que sirve para descubrir las casillas y marcar el numero de minas que tienen alrededor
+     *
+     * @param posicion recibe la posicion que queremos destapar como un entero
+     * @return devuelve un treemap con la posición de las casillas destapadas como clave y el número
+     * de minas que tiene alrededor como valor.
      */
     public TreeMap<Integer, Integer> descubreCasillas(int posicion) {
         //Si es una casilla que se puede destapar
@@ -48,12 +63,14 @@ public class buscaBurgers {
         }
         return destapadasKey;
     }
+
     /**
+     * Metodo que sirve para contar el número de minas que tiene alrededor una posicion dada.
      *
-     * @param posicion
-     * @return
+     * @param posicion recibe como parametro la posición como un entero
+     * @return devuelve el númro de minas que rodean a la posición com un entero.
      */
-    public int minasAlrededor(int posicion) {
+    private int minasAlrededor(int posicion) {
         int resultado = 0;
         for (int cas : casillasAdyacentes(posicion, filasTablero)) {
             if (tieneMina(cas)) {
@@ -62,10 +79,12 @@ public class buscaBurgers {
         }
         return resultado;
     }
+
     /**
+     * Metodo que determina si una posición dada tiene una mina o no.
      *
-     * @param posicion
-     * @return
+     * @param posicion recibe como parámetro la posición como un entero.
+     * @return (booleano) devuelve verdadero si tiene mina o falso si no.
      */
     public boolean tieneMina(int posicion) {
         boolean resultado = false;
@@ -73,9 +92,17 @@ public class buscaBurgers {
             return true;
         return resultado;
     }
-    boolean destapada(int pos){
-        return destapadas.contains(pos);
+
+    /**
+     * Metodo que determina si una casilla ha sido destapada o no
+     *
+     * @param posicion recibe como parámetro la posición como un entero.
+     * @return (booleano) devuelve true si la casilla ha sido destapada o false si no.
+     */
+    public boolean destapada(int posicion) {
+        return destapadas.contains(posicion);
     }
+
     /**
      * Método que calcula la posicion de las casillas adyacentes a una posición
      * dada
@@ -87,7 +114,7 @@ public class buscaBurgers {
      * @return (int[]) devuelve un array de enteros que son la posición de las
      * casillas que rodean a la posición pasada por parametro.
      */
-    public static int[] casillasAdyacentes(int posicion, int filas) {
+    private static int[] casillasAdyacentes(int posicion, int filas) {
         // si la posicion se encuentra en la columna de la izquierda(excepto el primer y
         // el ultimo registro)=>filaIzquierda=true;
         boolean filaIzquierda = false;
@@ -129,6 +156,7 @@ public class buscaBurgers {
         return new int[]{posicion - (filas + 1), posicion - filas, posicion - (filas - 1), posicion - 1,
                 posicion + 1, posicion + (filas - 1), posicion + filas, posicion + (filas + 1)};
     }
+
     /**
      * Método que genera un mapa cuyas claves serán las posiciónes en el tablero y
      * los valores, serán 0 si no tienen una mina asociada o 1 si sí que la tienen.
@@ -138,7 +166,7 @@ public class buscaBurgers {
      *                 tablero
      * @return (TreeMap) mapa con las posiciones y las minas asociadas.
      */
-    public TreeMap<Integer,Integer> generaTablero(int casillas, int numMinas) {
+    public TreeMap<Integer, Integer> generaTablero(int casillas, int numMinas) {
         int minado = 0;
         int[] tablero = new int[casillas];
         TreeSet<Integer> minas = new TreeSet<>();

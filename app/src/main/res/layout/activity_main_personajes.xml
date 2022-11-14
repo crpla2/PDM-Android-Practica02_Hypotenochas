@@ -55,6 +55,7 @@
         android:onClick="onClickVolverPerso"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPersonajes"
-        app:srcCompat="@drawable/choose" />
+        app:srcCompat="@drawable/choose"
+        android:contentDescription="Pulsador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

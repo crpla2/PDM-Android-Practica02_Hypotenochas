@@ -4,21 +4,23 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
-public class Cronometro implements Runnable
-{
+/**
+ * Clase que implementa el cronómetro del juego.
+ */
+public class Cronometro implements Runnable {
     // Atributos privados de la clase
     private final TextView etiq; // Etiqueta para mostrar la información
-    private int segundos, minutos; // Segundos, minutos y horas que lleva activo el cronómetro
+    private int segundos, minutos; // Segundos y minutos que lleva activo el cronómetro
     private final Handler escribirenUI; // Necesario para modificar la UI
     private Boolean pausado; // Para pausar el cronómetro
     private String salida; // Salida formateada de los datos del cronómetro
 
     /**
      * Constructor de la clase
+     *
      * @param etiqueta Etiqueta para mostrar información
      */
-    public Cronometro(TextView etiqueta)
-    {
+    public Cronometro(TextView etiqueta) {
         etiq = etiqueta;
         salida = "";
         segundos = 0;
@@ -27,35 +29,28 @@ public class Cronometro implements Runnable
         pausado = Boolean.FALSE;
     }
 
-    @Override
     /**
      * Acción del cronómetro, contar tiempo en segundo plano
      */
-    public void run()
-    {
-        try
-        {
-            while(Boolean.TRUE)
-            {
+    @Override
+    public void run() {
+        try {
+            while (Boolean.TRUE) {
                 Thread.sleep(1000);
                 salida = "";
-                if( !pausado )
-                {
+                if (!pausado) {
                     segundos++;
-                    if(segundos == 60)
-                    {
+                    if (segundos == 60) {
                         segundos = 0;
                         minutos++;
                     }
                     // Formateo la salida
-                    if( minutos <= 9 )
-                    {
+                    if (minutos <= 9) {
                         salida += "0";
                     }
                     salida += minutos;
                     salida += ":";
-                    if( segundos <= 9 )
-                    {
+                    if (segundos <= 9) {
                         salida += "0";
                     }
                     salida += segundos;
@@ -64,30 +59,31 @@ public class Cronometro implements Runnable
                     if (salida.equalsIgnoreCase("59:59"))
                         reiniciar();
                     // Modifico la UI
-                    try
-                    {
+                    try {
                         escribirenUI.post(() -> etiq.setText(salida));
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Log.i("Cronometro", "Error en el cronometro al escribir en la UI: " + e);
                     }
                 }
             }
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             Log.i("Cronometro", "Error en el cronometro: " + e);
         }
     }
-    public void reiniciar()
-    {
+
+    /**
+     * Poner el cronometro a cero.
+     */
+    public void reiniciar() {
         segundos = 0;
         minutos = 0;
         pausado = Boolean.FALSE;
     }
-    public void pause()
-    {
+
+    /**
+     * Pausar/reiniciar el cronómetro.
+     */
+    public void pause() {
         pausado = !pausado;
     }
 }

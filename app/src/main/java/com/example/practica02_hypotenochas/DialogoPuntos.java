@@ -9,54 +9,57 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Clase que define el diálogo para introducir el nombre al ganar el juego.
+ */
 public class DialogoPuntos extends DialogFragment {
-    RespuestaDialogoGenero respuesta;
+    RespuestaDialogoPuntos respuesta;
     EditText nombre;
 
-    /*contructor, esta clase se llamará cuando hacemos show()
-    de la clase DialogFragment
+    /**
+      Constructor, se llamará cuando hagamos show(), de la clase DialogFragment.
      */
-
+    @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedinstanceState){
+    public Dialog onCreateDialog(Bundle savedinstanceState) {
 
         //1. Usamos la clase Builder para construir el dialogo
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //2. Seteamos las carácteristicas(titulo)
         builder.setTitle("Introduce tu nombre:");
-       //Inflamos la vista
+        //Inflamos la vista
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.dialogo_layout, null);
         //Seteamos la vista en el builder
         builder.setView(v);
-        //
-        nombre=v.findViewById(R.id.usuario);
-
-        //3.Añadimos los botones (positivo,negativo,neutro)
+        //Definimos el campo de introducción de texto
+        nombre = v.findViewById(R.id.usuario);
+        //3.Añadimos el botón (Guardar)
         builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
-            String res="";
+            String res = "";
+
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                res=nombre.getText().toString();
+                res = nombre.getText().toString();
                 respuesta.onRespuesta(res);
             }
         });
-
         //4.Devolvemos el Dialog
         return builder.create();
     }
 
     //Interfaz para la comunicación entre la actividad y el fragmento doialogo
-    public interface RespuestaDialogoGenero{
+    public interface RespuestaDialogoPuntos {
         void onRespuesta(String s);
     }
-    //se invoca cuando el fragmento se añade a la actividad
 
+    //se invoca cuando el fragmento se añade a la actividad
     @Override
-    public void onAttach(Context activity){
+    public void onAttach(@NonNull Context activity) {
         super.onAttach(activity);
-        respuesta=(RespuestaDialogoGenero) activity;
+        respuesta = (RespuestaDialogoPuntos) activity;
     }
 }

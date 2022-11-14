@@ -32,4 +32,8 @@
     <string name="ganaste">You win!</string>
     <string name="puntuacion">Points:</string>
     <string name="tiempo">Time:</string>
+    <string name="Salon">HALL OF FAME</string>
+    <string name="perdiste">You loose!</string>
+    <string name="guardar">SAVE</string>
+    <string name="salir">EXIT</string>
 </resources>

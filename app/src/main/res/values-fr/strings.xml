@@ -32,4 +32,8 @@
     <string name="ganaste">Tu as gagné!</string>
     <string name="puntuacion">Points:</string>
     <string name="tiempo">Drurée:</string>
+    <string name="salir">SORTIR</string>
+    <string name="guardar">ENREGISTRER</string>
+    <string name="perdiste">Vous avez perdú!</string>
+    <string name="Salon">TEMPLE  DE LA RENOMÉE</string>
 </resources>

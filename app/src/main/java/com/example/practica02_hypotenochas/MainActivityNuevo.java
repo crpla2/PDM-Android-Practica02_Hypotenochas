@@ -1,6 +1,5 @@
 package com.example.practica02_hypotenochas;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ public class MainActivityNuevo extends AppCompatActivity {
     Intent salida;
     int icon, casillas, numMinas;
     //
-
     int filasTablero;
     int marcadas;
     int encontradas;
@@ -35,9 +33,6 @@ public class MainActivityNuevo extends AppCompatActivity {
     TextView tvminas;
     String tiempoTranscurrido;
     //
-
-
-    //
     private LinearLayout tablero;
     buscaBurgers juego;
     TreeMap<Integer, Integer> game;
@@ -45,8 +40,6 @@ public class MainActivityNuevo extends AppCompatActivity {
     boolean perdido = false;
     boolean ganado = false;
     //
-
-
     List<Button> botones = new ArrayList<>();
 
     /**
@@ -76,7 +69,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         tablero = findViewById(R.id.tablero);
         tablero.setOrientation(LinearLayout.HORIZONTAL);
         anadeLayouts();
-        juego = new buscaBurgers(casillas, numMinas, filasTablero);
+        juego = new buscaBurgers(filasTablero);
         tableroMinado = juego.generaTablero(casillas, numMinas);
 
         tvcronometro = findViewById(R.id.tiempo);
@@ -211,7 +204,7 @@ public class MainActivityNuevo extends AppCompatActivity {
         if (view.isClickable()) {
             game = juego.descubreCasillas(view.getId());
             //bucle que impide que se pueda iniciar una partida destapando una bomba
-            while (buscaBurgers.destapadas.size() == 0) {
+            while (juego.getDestapadas().size() == 0) {
                 //Se combrueba que la casilla seleccionada no contenga una bomba
                 for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
                     if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
@@ -232,7 +225,6 @@ public class MainActivityNuevo extends AppCompatActivity {
 
             } else {
                 //Se descubren las casillas y se escribe el numero de bombas adyacentes
-
                 for (Map.Entry<Integer, Integer> integerEntry : game.entrySet()) {
                     for (int i = 0; i < casillas; i++) {
                         Button b = botones.get(i);
@@ -267,7 +259,7 @@ public class MainActivityNuevo extends AppCompatActivity {
             }
             game.clear();
             //comprobación de que se haya ganado el juego
-            if (buscaBurgers.destapadas.size() == casillas - numMinas) {
+            if (juego.getDestapadas().size() == casillas - numMinas) {
                 victoria();
             }
         }
@@ -276,6 +268,7 @@ public class MainActivityNuevo extends AppCompatActivity {
     public void volver(View view) {
         salida = new Intent(this, MainActivity.class);
         startActivity(salida);
+        overridePendingTransition(R.anim.right_in, R.anim.right_out);
     }
 
     /**
@@ -294,8 +287,9 @@ public class MainActivityNuevo extends AppCompatActivity {
             salida.putExtra("tiempo", tiempoTranscurrido);
             salida.putExtra("casillas", casillas);
             startActivity(salida);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             //fin espera
-        }, 2000);
+        }, 3000);
 
     }
 
@@ -325,16 +319,11 @@ public class MainActivityNuevo extends AppCompatActivity {
         //Espera 3 segundos
         handler.postDelayed(() -> {
             //Muestra pantalla de perdedor
-            setContentView(R.layout.activity_main_looser);
-            //espera 2 segundos
-            handler.postDelayed(() -> {
-                //Ve a a inicio
-                salida = new Intent(this, MainActivity.class);
-                startActivity(salida);
-                //fin espera
-            }, 3000);
-            //fin espera
+            salida = new Intent(this, MainActivityLooser.class);
+            startActivity(salida);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }, 3000);
+
 
     }
 

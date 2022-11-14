@@ -1,59 +1,57 @@
 package com.example.practica02_hypotenochas;
 
-import android.graphics.drawable.Drawable;
-
+/**
+ * Clase que define el objeto jugador
+ * Se utiliza para registrar los datos del jugador el el salón de la fama.
+ */
 public class Jugador {
     private int icon;
-    private int puntos;
-    private String tiempo;
-    private String nombre;
-    private int nivel;
+    private final int puntos;
+    private final String tiempo;
+    private final String nombre;
+    private final int nivel;
 
-        // Constructor
-        public Jugador(String nombre, int puntos, String tiempo, int nivel,int icon) {
-            this.nombre =nombre ;
-            this.puntos = puntos;
-            this.tiempo = tiempo;
-            this.nivel=nivel;
-            this.icon=icon;
-        }
+    /**
+     * Constructor
+     *
+     * @param nombre Nombre del jugador (String)
+     * @param puntos Puntos realizados(int)
+     * @param tiempo Tiempo utilizado (String)
+     * @param nivel  Nivel de la partida (int)
+     * @param icon   Icono del personaje con el que ha jugado (icon)
+     */
+    public Jugador(String nombre, int puntos, String tiempo, int nivel, int icon) {
+        this.nombre = nombre;
+        this.puntos = puntos;
+        this.tiempo = tiempo;
+        this.nivel = nivel;
+        this.icon = icon;
+    }
 
+    // Getters y Setters:
 
+    public String getNombre() {
+        return nombre;
+    }
 
-    // Getter and Setter
-        public String getNombre() {
-            return nombre;
-        }
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
+    public int getPuntos() {
+        return puntos;
+    }
 
-        public int getPuntos() {
-            return puntos;
-        }
-        public void setPuntos(int puntos) {
-            this.puntos = puntos;
-        }
+    public String getTiempo() {
+        return tiempo;
+    }
 
-        public String getTiempo() {
-            return tiempo;
-        }
-        public void setTiempo(String tiempo) {
-            this.tiempo = tiempo;
-        }
+    public int getNivel() {
+        return nivel;
+    }
 
-        public int getNivel() {
-            return nivel;
-        }
-        public void setNivel(int nivel) {
-            this.nivel = nivel;
-        }
+    public int getIcon() {
+        return icon;
+    }
 
-        public int getIcon() {
-            return icon;
-        }
-        public void setIcon(int icon) {
-           this.icon = icon;
-        }
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
 
 }
