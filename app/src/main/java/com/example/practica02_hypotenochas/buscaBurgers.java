@@ -70,7 +70,7 @@ public class buscaBurgers {
      * @param posicion recibe como parametro la posición como un entero
      * @return devuelve el númro de minas que rodean a la posición com un entero.
      */
-    private int minasAlrededor(int posicion) {
+    public int minasAlrededor(int posicion) {
         int resultado = 0;
         for (int cas : casillasAdyacentes(posicion, filasTablero)) {
             if (tieneMina(cas)) {

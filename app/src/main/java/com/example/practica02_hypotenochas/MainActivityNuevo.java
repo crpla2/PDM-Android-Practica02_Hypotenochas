@@ -1,5 +1,6 @@
 package com.example.practica02_hypotenochas;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -159,6 +160,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      *             En este caso será el boton pulsado.
      * @return devuelve true cuando se ha producido una pulación larga.
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private boolean onLongClick(View view) {
         //Si no ha sido marcada anteriormente
         if (view.isClickable()) {
@@ -203,8 +205,8 @@ public class MainActivityNuevo extends AppCompatActivity {
         //Si no ha sido marcada
         if (view.isClickable()) {
             game = juego.descubreCasillas(view.getId());
-            //bucle que impide que se pueda iniciar una partida destapando una bomba
-            while (juego.getDestapadas().size() == 0) {
+            //Se impide que se pueda iniciar una partida destapando una bomba
+            if (juego.getDestapadas().size() == 0) {
                 //Se combrueba que la casilla seleccionada no contenga una bomba
                 for (Map.Entry<Integer, Integer> minasEntry : tableroMinado.entrySet()) {
                     if (minasEntry.getKey() == view.getId() && minasEntry.getValue() == 1) {
@@ -302,6 +304,7 @@ public class MainActivityNuevo extends AppCompatActivity {
     /**
      * Metodo que define el comportamiento cuando se pierde el juego
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void derrota() {
         cronometro.pause();
         Handler handler = new Handler();
