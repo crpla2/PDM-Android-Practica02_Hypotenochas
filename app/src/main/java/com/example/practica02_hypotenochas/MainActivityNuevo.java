@@ -202,6 +202,7 @@ public class MainActivityNuevo extends AppCompatActivity {
      */
 
     public void onClick(View view) {
+
         //Si no ha sido marcada
         if (view.isClickable()) {
             game = juego.descubreCasillas(view.getId());
@@ -266,6 +267,8 @@ public class MainActivityNuevo extends AppCompatActivity {
             }
         }
     }
+
+
 
     /**
      * Metodo que define el comportamiento del boton volver (piña).
