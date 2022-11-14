@@ -34,4 +34,7 @@
         <item>Plankton</item>
         <item>Gary</item>
     </string-array>
+    <string name="perdiste">Perdiste!</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="salir">SALIR</string>
 </resources>
